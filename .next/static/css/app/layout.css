@@ -1147,6 +1147,9 @@ code, pre {
 .right-1{
   right: 0.25rem;
 }
+.right-1\/3{
+  right: 33.333333%;
+}
 .right-1\/4{
   right: 25%;
 }
@@ -1204,6 +1207,9 @@ code, pre {
 .top-28{
   top: 7rem;
 }
+.top-3\/4{
+  top: 75%;
+}
 .top-4{
   top: 1rem;
 }
@@ -1221,12 +1227,6 @@ code, pre {
 }
 .top-full{
   top: 100%;
-}
-.right-1\/3{
-  right: 33.333333%;
-}
-.top-3\/4{
-  top: 75%;
 }
 .-z-10{
   z-index: -10;
@@ -1270,17 +1270,14 @@ code, pre {
 .\!m-0{
   margin: 0px !important;
 }
+.-m-2{
+  margin: -0.5rem;
+}
 .m-4{
   margin: 1rem;
 }
 .m-5{
   margin: 1.25rem;
-}
-.m-\[1px\]{
-  margin: 1px;
-}
-.-m-2{
-  margin: -0.5rem;
 }
 .mx-1{
   margin-left: 0.25rem;
@@ -1324,9 +1321,6 @@ code, pre {
 }
 .-ml-4{
   margin-left: -1rem;
-}
-.-ml-8{
-  margin-left: -2rem;
 }
 .-mr-4{
   margin-right: -1rem;
@@ -1406,6 +1400,9 @@ code, pre {
 .mr-3{
   margin-right: 0.75rem;
 }
+.mr-4{
+  margin-right: 1rem;
+}
 .mt-1{
   margin-top: 0.25rem;
 }
@@ -1442,32 +1439,23 @@ code, pre {
 .mt-\[9vw\]{
   margin-top: 9vw;
 }
-.mr-4{
-  margin-right: 1rem;
-}
 .mt-auto{
   margin-top: auto;
 }
 .box-border{
   box-sizing: border-box;
 }
-.line-clamp-2{
+.line-clamp-3{
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
 }
 .line-clamp-4{
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
-}
-.line-clamp-3{
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
 }
 .\!block{
   display: block !important;
@@ -1532,11 +1520,11 @@ code, pre {
 .h-2\.5{
   height: 0.625rem;
 }
-.h-20{
-  height: 5rem;
-}
 .h-24{
   height: 6rem;
+}
+.h-28{
+  height: 7rem;
 }
 .h-3{
   height: 0.75rem;
@@ -1552,6 +1540,9 @@ code, pre {
 }
 .h-40{
   height: 10rem;
+}
+.h-48{
+  height: 12rem;
 }
 .h-5{
   height: 1.25rem;
@@ -1664,12 +1655,6 @@ code, pre {
 .h-screen{
   height: 100vh;
 }
-.h-28{
-  height: 7rem;
-}
-.h-48{
-  height: 12rem;
-}
 .max-h-64{
   max-height: 16rem;
 }
@@ -1709,6 +1694,9 @@ code, pre {
 .w-0{
   width: 0px;
 }
+.w-0\.5{
+  width: 0.125rem;
+}
 .w-1{
   width: 0.25rem;
 }
@@ -1742,11 +1730,11 @@ code, pre {
 .w-2\/5{
   width: 40%;
 }
-.w-20{
-  width: 5rem;
-}
 .w-24{
   width: 6rem;
+}
+.w-28{
+  width: 7rem;
 }
 .w-3{
   width: 0.75rem;
@@ -1888,12 +1876,6 @@ code, pre {
 }
 .w-screen{
   width: 100vw;
-}
-.w-0\.5{
-  width: 0.125rem;
-}
-.w-28{
-  width: 7rem;
 }
 .min-w-0{
   min-width: 0px;
@@ -2361,6 +2343,11 @@ code, pre {
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
+.space-y-20 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(5rem * var(--tw-space-y-reverse));
+}
 .space-y-24 > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
   margin-top: calc(6rem * calc(1 - var(--tw-space-y-reverse)));
@@ -2376,6 +2363,11 @@ code, pre {
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
+.space-y-5 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
 .space-y-6 > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -2385,16 +2377,6 @@ code, pre {
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
-}
-.space-y-20 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(5rem * var(--tw-space-y-reverse));
-}
-.space-y-5 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 .self-start{
   align-self: flex-start;
@@ -2604,6 +2586,10 @@ code, pre {
 .border-\[rgb\(var\(--primary\)\)\]{
   border-color: rgb(var(--primary));
 }
+.border-ai-blue-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(10 132 255 / var(--tw-border-opacity, 1));
+}
 .border-ai-blue-500\/30{
   border-color: rgb(10 132 255 / 0.3);
 }
@@ -2747,9 +2733,6 @@ code, pre {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
 }
-.border-red-500\/30{
-  border-color: rgb(239 68 68 / 0.3);
-}
 .border-red-500\/50{
   border-color: rgb(239 68 68 / 0.5);
 }
@@ -2799,23 +2782,11 @@ code, pre {
   --tw-border-opacity: 1;
   border-color: rgb(228 228 231 / var(--tw-border-opacity, 1));
 }
-.border-ai-blue-500{
-  --tw-border-opacity: 1;
-  border-color: rgb(10 132 255 / var(--tw-border-opacity, 1));
-}
-.border-b-blue-500{
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(59 130 246 / var(--tw-border-opacity, 1));
-}
 .border-l-neutral-700\/50{
   border-left-color: rgb(64 64 64 / 0.5);
 }
 .border-t-transparent{
   border-top-color: transparent;
-}
-.border-t-white{
-  --tw-border-opacity: 1;
-  border-top-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
 }
 .bg-\[\#0070f3\]{
   --tw-bg-opacity: 1;
@@ -2883,12 +2854,29 @@ code, pre {
 .bg-ai-blue-500\/5{
   background-color: rgb(10 132 255 / 0.05);
 }
+.bg-ai-blue-500\/70{
+  background-color: rgb(10 132 255 / 0.7);
+}
+.bg-ai-blue-500\/80{
+  background-color: rgb(10 132 255 / 0.8);
+}
+.bg-ai-purple-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(159 51 255 / var(--tw-bg-opacity, 1));
+}
 .bg-ai-purple-500{
   --tw-bg-opacity: 1;
   background-color: rgb(135 0 255 / var(--tw-bg-opacity, 1));
 }
 .bg-ai-purple-500\/10{
   background-color: rgb(135 0 255 / 0.1);
+}
+.bg-ai-purple-500\/5{
+  background-color: rgb(135 0 255 / 0.05);
+}
+.bg-ai-teal-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 255 243 / var(--tw-bg-opacity, 1));
 }
 .bg-ai-teal-500{
   --tw-bg-opacity: 1;
@@ -3094,10 +3082,6 @@ code, pre {
   --tw-bg-opacity: 1;
   background-color: rgb(243 232 255 / var(--tw-bg-opacity, 1));
 }
-.bg-purple-400{
-  --tw-bg-opacity: 1;
-  background-color: rgb(192 132 252 / var(--tw-bg-opacity, 1));
-}
 .bg-purple-500\/10{
   background-color: rgb(168 85 247 / 0.1);
 }
@@ -3168,8 +3152,14 @@ code, pre {
 .bg-white\/20{
   background-color: rgb(255 255 255 / 0.2);
 }
+.bg-white\/30{
+  background-color: rgb(255 255 255 / 0.3);
+}
 .bg-white\/5{
   background-color: rgb(255 255 255 / 0.05);
+}
+.bg-white\/50{
+  background-color: rgb(255 255 255 / 0.5);
 }
 .bg-white\/\[0\.2\]{
   background-color: rgb(255 255 255 / 0.2);
@@ -3200,29 +3190,6 @@ code, pre {
 .bg-zinc-950{
   --tw-bg-opacity: 1;
   background-color: rgb(9 9 11 / var(--tw-bg-opacity, 1));
-}
-.bg-ai-purple-400{
-  --tw-bg-opacity: 1;
-  background-color: rgb(159 51 255 / var(--tw-bg-opacity, 1));
-}
-.bg-ai-purple-500\/5{
-  background-color: rgb(135 0 255 / 0.05);
-}
-.bg-ai-teal-400{
-  --tw-bg-opacity: 1;
-  background-color: rgb(51 255 243 / var(--tw-bg-opacity, 1));
-}
-.bg-white\/30{
-  background-color: rgb(255 255 255 / 0.3);
-}
-.bg-white\/50{
-  background-color: rgb(255 255 255 / 0.5);
-}
-.bg-ai-blue-500\/70{
-  background-color: rgb(10 132 255 / 0.7);
-}
-.bg-ai-blue-500\/80{
-  background-color: rgb(10 132 255 / 0.8);
 }
 .bg-opacity-50{
   --tw-bg-opacity: 0.5;
@@ -3274,6 +3241,11 @@ code, pre {
   --tw-gradient-to: rgb(76 13 82 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+.from-ai-blue-400{
+  --tw-gradient-from: #3392ff var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(51 146 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
 .from-ai-blue-500{
   --tw-gradient-from: #0A84FF var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
@@ -3299,8 +3271,33 @@ code, pre {
   --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+.from-ai-blue-500\/40{
+  --tw-gradient-from: rgb(10 132 255 / 0.4) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-ai-blue-500\/5{
+  --tw-gradient-from: rgb(10 132 255 / 0.05) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
 .from-ai-blue-500\/50{
   --tw-gradient-from: rgb(10 132 255 / 0.5) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-ai-blue-500\/80{
+  --tw-gradient-from: rgb(10 132 255 / 0.8) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-ai-blue-500\/\[0\.03\]{
+  --tw-gradient-from: rgb(10 132 255 / 0.03) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-ai-blue-500\/\[0\.05\]{
+  --tw-gradient-from: rgb(10 132 255 / 0.05) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
@@ -3344,6 +3341,11 @@ code, pre {
   --tw-gradient-to: rgb(0 230 230 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+.from-ai-teal-500\/10{
+  --tw-gradient-from: rgb(0 230 230 / 0.1) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 230 230 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
 .from-ai-teal-500\/20{
   --tw-gradient-from: rgb(0 230 230 / 0.2) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(0 230 230 / 0) var(--tw-gradient-to-position);
@@ -3356,6 +3358,11 @@ code, pre {
 }
 .from-black\/50{
   --tw-gradient-from: rgb(0 0 0 / 0.5) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-black\/70{
+  --tw-gradient-from: rgb(0 0 0 / 0.7) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
@@ -3382,11 +3389,6 @@ code, pre {
 .from-emerald-400\/0{
   --tw-gradient-from: rgb(52 211 153 / 0) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(52 211 153 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-fuchsia-500{
-  --tw-gradient-from: #d946ef var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(217 70 239 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 .from-indigo-300{
@@ -3454,11 +3456,6 @@ code, pre {
   --tw-gradient-to: rgb(216 180 254 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
-.from-purple-400{
-  --tw-gradient-from: #c084fc var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(192 132 252 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
 .from-purple-500{
   --tw-gradient-from: #a855f7 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(168 85 247 / 0) var(--tw-gradient-to-position);
@@ -3469,11 +3466,6 @@ code, pre {
   --tw-gradient-to: rgb(168 85 247 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
-.from-purple-500\/30{
-  --tw-gradient-from: rgb(168 85 247 / 0.3) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(168 85 247 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
 .from-purple-600{
   --tw-gradient-from: #9333ea var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(147 51 234 / 0) var(--tw-gradient-to-position);
@@ -3481,11 +3473,6 @@ code, pre {
 }
 .from-purple-600\/20{
   --tw-gradient-from: rgb(147 51 234 / 0.2) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(147 51 234 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-purple-600\/90{
-  --tw-gradient-from: rgb(147 51 234 / 0.9) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(147 51 234 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
@@ -3502,16 +3489,6 @@ code, pre {
 .from-transparent{
   --tw-gradient-from: transparent var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-violet-500{
-  --tw-gradient-from: #8b5cf6 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(139 92 246 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-violet-500\/30{
-  --tw-gradient-from: rgb(139 92 246 / 0.3) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(139 92 246 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 .from-white{
@@ -3532,46 +3509,6 @@ code, pre {
 .from-white\/5{
   --tw-gradient-from: rgb(255 255 255 / 0.05) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-ai-blue-400{
-  --tw-gradient-from: #3392ff var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(51 146 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-ai-blue-500\/40{
-  --tw-gradient-from: rgb(10 132 255 / 0.4) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-ai-blue-500\/5{
-  --tw-gradient-from: rgb(10 132 255 / 0.05) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-ai-blue-500\/80{
-  --tw-gradient-from: rgb(10 132 255 / 0.8) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-ai-blue-500\/\[0\.03\]{
-  --tw-gradient-from: rgb(10 132 255 / 0.03) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-ai-blue-500\/\[0\.05\]{
-  --tw-gradient-from: rgb(10 132 255 / 0.05) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-ai-teal-500\/10{
-  --tw-gradient-from: rgb(0 230 230 / 0.1) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 230 230 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-black\/70{
-  --tw-gradient-from: rgb(0 0 0 / 0.7) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 .from-\[0\%\]{
@@ -3597,6 +3534,14 @@ code, pre {
   --tw-gradient-to: rgb(135 0 255 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #8700FF var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
+.via-ai-purple-500\/20{
+  --tw-gradient-to: rgb(135 0 255 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(135 0 255 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+.via-ai-purple-500\/5{
+  --tw-gradient-to: rgb(135 0 255 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(135 0 255 / 0.05) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
 .via-ai-purple-900\/10{
   --tw-gradient-to: rgb(27 0 51 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), rgb(27 0 51 / 0.1) var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -3617,6 +3562,10 @@ code, pre {
   --tw-gradient-to: rgb(0 230 230 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), rgb(0 230 230 / 0.5) var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
+.via-ai-teal-500\/80{
+  --tw-gradient-to: rgb(0 230 230 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(0 230 230 / 0.8) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
 .via-ai-teal-600{
   --tw-gradient-to: rgb(0 184 184 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #00b8b8 var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -3629,10 +3578,6 @@ code, pre {
   --tw-gradient-to: rgb(0 0 0 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), rgb(0 0 0 / 0.9) var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
-.via-blue-400{
-  --tw-gradient-to: rgb(96 165 250 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), #60a5fa var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
 .via-blue-500{
   --tw-gradient-to: rgb(59 130 246 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #3b82f6 var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -3640,10 +3585,6 @@ code, pre {
 .via-blue-500\/20{
   --tw-gradient-to: rgb(59 130 246 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), rgb(59 130 246 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.via-blue-500\/30{
-  --tw-gradient-to: rgb(59 130 246 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgb(59 130 246 / 0.3) var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 .via-blue-600{
   --tw-gradient-to: rgb(37 99 235 / 0)  var(--tw-gradient-to-position);
@@ -3697,6 +3638,10 @@ code, pre {
   --tw-gradient-to: rgb(0 0 0 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
+.via-white\/20{
+  --tw-gradient-to: rgb(255 255 255 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(255 255 255 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
 .via-white\/30{
   --tw-gradient-to: rgb(255 255 255 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), rgb(255 255 255 / 0.3) var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -3708,22 +3653,6 @@ code, pre {
 .via-white\/50{
   --tw-gradient-to: rgb(255 255 255 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), rgb(255 255 255 / 0.5) var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.via-ai-purple-500\/20{
-  --tw-gradient-to: rgb(135 0 255 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgb(135 0 255 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.via-ai-purple-500\/5{
-  --tw-gradient-to: rgb(135 0 255 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgb(135 0 255 / 0.05) var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.via-ai-teal-500\/80{
-  --tw-gradient-to: rgb(0 230 230 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgb(0 230 230 / 0.8) var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.via-white\/20{
-  --tw-gradient-to: rgb(255 255 255 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgb(255 255 255 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 .via-\[50\%\]{
   --tw-gradient-via-position: 50%;
@@ -3758,11 +3687,23 @@ code, pre {
 .to-ai-purple-500\/20{
   --tw-gradient-to: rgb(135 0 255 / 0.2) var(--tw-gradient-to-position);
 }
+.to-ai-purple-500\/40{
+  --tw-gradient-to: rgb(135 0 255 / 0.4) var(--tw-gradient-to-position);
+}
 .to-ai-purple-500\/5{
   --tw-gradient-to: rgb(135 0 255 / 0.05) var(--tw-gradient-to-position);
 }
+.to-ai-purple-500\/50{
+  --tw-gradient-to: rgb(135 0 255 / 0.5) var(--tw-gradient-to-position);
+}
+.to-ai-purple-500\/80{
+  --tw-gradient-to: rgb(135 0 255 / 0.8) var(--tw-gradient-to-position);
+}
 .to-ai-purple-900\/20{
   --tw-gradient-to: rgb(27 0 51 / 0.2) var(--tw-gradient-to-position);
+}
+.to-ai-teal-400{
+  --tw-gradient-to: #33fff3 var(--tw-gradient-to-position);
 }
 .to-ai-teal-500{
   --tw-gradient-to: #00E6E6 var(--tw-gradient-to-position);
@@ -3776,11 +3717,20 @@ code, pre {
 .to-ai-teal-500\/30{
   --tw-gradient-to: rgb(0 230 230 / 0.3) var(--tw-gradient-to-position);
 }
+.to-ai-teal-500\/40{
+  --tw-gradient-to: rgb(0 230 230 / 0.4) var(--tw-gradient-to-position);
+}
 .to-ai-teal-500\/5{
   --tw-gradient-to: rgb(0 230 230 / 0.05) var(--tw-gradient-to-position);
 }
 .to-ai-teal-500\/50{
   --tw-gradient-to: rgb(0 230 230 / 0.5) var(--tw-gradient-to-position);
+}
+.to-ai-teal-500\/\[0\.03\]{
+  --tw-gradient-to: rgb(0 230 230 / 0.03) var(--tw-gradient-to-position);
+}
+.to-ai-teal-500\/\[0\.05\]{
+  --tw-gradient-to: rgb(0 230 230 / 0.05) var(--tw-gradient-to-position);
 }
 .to-ai-teal-600{
   --tw-gradient-to: #00b8b8 var(--tw-gradient-to-position);
@@ -3800,32 +3750,17 @@ code, pre {
 .to-black\/50{
   --tw-gradient-to: rgb(0 0 0 / 0.5) var(--tw-gradient-to-position);
 }
-.to-blue-400{
-  --tw-gradient-to: #60a5fa var(--tw-gradient-to-position);
-}
 .to-blue-600{
   --tw-gradient-to: #2563eb var(--tw-gradient-to-position);
 }
 .to-blue-600\/20{
   --tw-gradient-to: rgb(37 99 235 / 0.2) var(--tw-gradient-to-position);
 }
-.to-blue-600\/90{
-  --tw-gradient-to: rgb(37 99 235 / 0.9) var(--tw-gradient-to-position);
-}
 .to-blue-900\/40{
   --tw-gradient-to: rgb(30 58 138 / 0.4) var(--tw-gradient-to-position);
 }
 .to-blue-950{
   --tw-gradient-to: #172554 var(--tw-gradient-to-position);
-}
-.to-cyan-400{
-  --tw-gradient-to: #22d3ee var(--tw-gradient-to-position);
-}
-.to-cyan-500{
-  --tw-gradient-to: #06b6d4 var(--tw-gradient-to-position);
-}
-.to-cyan-500\/30{
-  --tw-gradient-to: rgb(6 182 212 / 0.3) var(--tw-gradient-to-position);
 }
 .to-cyan-600{
   --tw-gradient-to: #0891b2 var(--tw-gradient-to-position);
@@ -3859,9 +3794,6 @@ code, pre {
 }
 .to-neutral-950{
   --tw-gradient-to: #0a0a0a var(--tw-gradient-to-position);
-}
-.to-pink-500{
-  --tw-gradient-to: #ec4899 var(--tw-gradient-to-position);
 }
 .to-purple-300{
   --tw-gradient-to: #d8b4fe var(--tw-gradient-to-position);
@@ -3908,27 +3840,6 @@ code, pre {
 .to-white\/80{
   --tw-gradient-to: rgb(255 255 255 / 0.8) var(--tw-gradient-to-position);
 }
-.to-ai-purple-500\/40{
-  --tw-gradient-to: rgb(135 0 255 / 0.4) var(--tw-gradient-to-position);
-}
-.to-ai-purple-500\/50{
-  --tw-gradient-to: rgb(135 0 255 / 0.5) var(--tw-gradient-to-position);
-}
-.to-ai-purple-500\/80{
-  --tw-gradient-to: rgb(135 0 255 / 0.8) var(--tw-gradient-to-position);
-}
-.to-ai-teal-400{
-  --tw-gradient-to: #33fff3 var(--tw-gradient-to-position);
-}
-.to-ai-teal-500\/40{
-  --tw-gradient-to: rgb(0 230 230 / 0.4) var(--tw-gradient-to-position);
-}
-.to-ai-teal-500\/\[0\.03\]{
-  --tw-gradient-to: rgb(0 230 230 / 0.03) var(--tw-gradient-to-position);
-}
-.to-ai-teal-500\/\[0\.05\]{
-  --tw-gradient-to: rgb(0 230 230 / 0.05) var(--tw-gradient-to-position);
-}
 .to-\[100\%\]{
   --tw-gradient-to-position: 100%;
 }
@@ -3943,9 +3854,6 @@ code, pre {
 }
 .bg-cover{
   background-size: cover;
-}
-.bg-clip-padding{
-  background-clip: padding-box;
 }
 .bg-clip-text{
   background-clip: text;
@@ -3979,6 +3887,9 @@ code, pre {
 }
 .p-10{
   padding: 2.5rem;
+}
+.p-12{
+  padding: 3rem;
 }
 .p-2{
   padding: 0.5rem;
@@ -4015,9 +3926,6 @@ code, pre {
 }
 .p-px{
   padding: 1px;
-}
-.p-12{
-  padding: 3rem;
 }
 .px-1{
   padding-left: 0.25rem;
@@ -4152,6 +4060,9 @@ code, pre {
 .pb-8{
   padding-bottom: 2rem;
 }
+.pl-10{
+  padding-left: 2.5rem;
+}
 .pl-12{
   padding-left: 3rem;
 }
@@ -4170,14 +4081,14 @@ code, pre {
 .pl-6{
   padding-left: 1.5rem;
 }
-.pl-8{
-  padding-left: 2rem;
-}
 .pr-2{
   padding-right: 0.5rem;
 }
 .pr-20{
   padding-right: 5rem;
+}
+.pr-3{
+  padding-right: 0.75rem;
 }
 .pr-4{
   padding-right: 1rem;
@@ -4217,12 +4128,6 @@ code, pre {
 }
 .pt-6{
   padding-top: 1.5rem;
-}
-.pl-10{
-  padding-left: 2.5rem;
-}
-.pr-3{
-  padding-right: 0.75rem;
 }
 .text-left{
   text-align: left;
@@ -4543,10 +4448,6 @@ code, pre {
   --tw-text-opacity: 1;
   color: rgb(251 146 60 / var(--tw-text-opacity, 1));
 }
-.text-pink-400{
-  --tw-text-opacity: 1;
-  color: rgb(244 114 182 / var(--tw-text-opacity, 1));
-}
 .text-purple-300{
   --tw-text-opacity: 1;
   color: rgb(216 180 254 / var(--tw-text-opacity, 1));
@@ -4570,10 +4471,6 @@ code, pre {
 .text-slate-400{
   --tw-text-opacity: 1;
   color: rgb(148 163 184 / var(--tw-text-opacity, 1));
-}
-.text-teal-400{
-  --tw-text-opacity: 1;
-  color: rgb(45 212 191 / var(--tw-text-opacity, 1));
 }
 .text-transparent{
   color: transparent;
@@ -4639,13 +4536,13 @@ code, pre {
   --tw-placeholder-opacity: 1;
   color: rgb(156 163 175 / var(--tw-placeholder-opacity, 1));
 }
-.placeholder-neutral-500::placeholder{
-  --tw-placeholder-opacity: 1;
-  color: rgb(115 115 115 / var(--tw-placeholder-opacity, 1));
-}
 .placeholder-neutral-400::placeholder{
   --tw-placeholder-opacity: 1;
   color: rgb(163 163 163 / var(--tw-placeholder-opacity, 1));
+}
+.placeholder-neutral-500::placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-placeholder-opacity, 1));
 }
 .opacity-0{
   opacity: 0;
@@ -4848,6 +4745,9 @@ code, pre {
 .ring-ai-blue-500\/20{
   --tw-ring-color: rgb(10 132 255 / 0.2);
 }
+.ring-black\/30{
+  --tw-ring-color: rgb(0 0 0 / 0.3);
+}
 .ring-indigo-500{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity, 1));
@@ -4858,9 +4758,6 @@ code, pre {
 .ring-zinc-950{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(9 9 11 / var(--tw-ring-opacity, 1));
-}
-.ring-black\/30{
-  --tw-ring-color: rgb(0 0 0 / 0.3);
 }
 .ring-offset-4{
   --tw-ring-offset-width: 4px;
@@ -4892,6 +4789,18 @@ code, pre {
   --tw-blur: blur(120px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
+.blur-\[130px\]{
+  --tw-blur: blur(130px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.blur-\[150px\]{
+  --tw-blur: blur(150px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.blur-\[1px\]{
+  --tw-blur: blur(1px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
 .blur-\[80px\]{
   --tw-blur: blur(80px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -4914,18 +4823,6 @@ code, pre {
 }
 .blur-xl{
   --tw-blur: blur(24px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-.blur-\[130px\]{
-  --tw-blur: blur(130px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-.blur-\[150px\]{
-  --tw-blur: blur(150px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-.blur-\[1px\]{
-  --tw-blur: blur(1px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .drop-shadow{
@@ -5923,6 +5820,11 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   background-color: rgba(0,118,255,0.9);
 }
 
+.hover\:bg-ai-blue-500:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(10 132 255 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-black\/10:hover{
   background-color: rgb(0 0 0 / 0.1);
 }
@@ -6081,20 +5983,27 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   background-color: rgb(24 24 27 / 0.8);
 }
 
-.hover\:bg-ai-blue-500:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(10 132 255 / var(--tw-bg-opacity, 1));
-}
-
 .hover\:from-\[\#5c1262\]:hover{
   --tw-gradient-from: #5c1262 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(92 18 98 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.hover\:from-ai-blue-400:hover{
+  --tw-gradient-from: #3392ff var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(51 146 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .hover\:from-ai-blue-500:hover{
   --tw-gradient-from: #0A84FF var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(10 132 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.hover\:from-ai-blue-600:hover{
+  --tw-gradient-from: #0068cc var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 104 204 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -6122,24 +6031,20 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.hover\:from-ai-blue-600:hover{
-  --tw-gradient-from: #0068cc var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 104 204 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.hover\:from-ai-blue-400:hover{
-  --tw-gradient-from: #3392ff var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(51 146 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .hover\:to-\[\#4a1da4\]:hover{
   --tw-gradient-to: #4a1da4 var(--tw-gradient-to-position);
 }
 
+.hover\:to-ai-teal-400:hover{
+  --tw-gradient-to: #33fff3 var(--tw-gradient-to-position);
+}
+
 .hover\:to-ai-teal-500:hover{
   --tw-gradient-to: #00E6E6 var(--tw-gradient-to-position);
+}
+
+.hover\:to-ai-teal-600:hover{
+  --tw-gradient-to: #00b8b8 var(--tw-gradient-to-position);
 }
 
 .hover\:to-blue-500:hover{
@@ -6156,14 +6061,6 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
 
 .hover\:to-neutral-700\/90:hover{
   --tw-gradient-to: rgb(64 64 64 / 0.9) var(--tw-gradient-to-position);
-}
-
-.hover\:to-ai-teal-600:hover{
-  --tw-gradient-to: #00b8b8 var(--tw-gradient-to-position);
-}
-
-.hover\:to-ai-teal-400:hover{
-  --tw-gradient-to: #33fff3 var(--tw-gradient-to-position);
 }
 
 .hover\:text-ai-blue-300:hover{
@@ -6348,6 +6245,10 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   --tw-ring-color: rgb(58 58 69 / var(--tw-ring-opacity, 1));
 }
 
+.focus\:ring-ai-blue-500\/50:focus{
+  --tw-ring-color: rgb(10 132 255 / 0.5);
+}
+
 .focus\:ring-blue-400:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(96 165 250 / var(--tw-ring-opacity, 1));
@@ -6365,10 +6266,6 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
 .focus\:ring-zinc-950:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(9 9 11 / var(--tw-ring-opacity, 1));
-}
-
-.focus\:ring-ai-blue-500\/50:focus{
-  --tw-ring-color: rgb(10 132 255 / 0.5);
 }
 
 .focus\:ring-offset-2:focus{
@@ -6466,11 +6363,6 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
 
 .group\/bento:hover .group-hover\/bento\:translate-x-2{
   --tw-translate-x: 0.5rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group\/btn:hover .group-hover\/btn\:translate-y-0\.5{
-  --tw-translate-y: 0.125rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -6588,10 +6480,6 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   background-color: rgb(255 255 255 / 0.05);
 }
 
-.group:hover .group-hover\:bg-gradient-to-r{
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
 .group:hover .group-hover\:from-ai-blue-400{
   --tw-gradient-from: #3392ff var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(51 146 255 / 0) var(--tw-gradient-to-position);
@@ -6604,55 +6492,12 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.group:hover .group-hover\:from-purple-400{
-  --tw-gradient-from: #c084fc var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(192 132 252 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .group:hover .group-hover\:to-ai-teal-400{
   --tw-gradient-to: #33fff3 var(--tw-gradient-to-position);
 }
 
-.group:hover .group-hover\:to-cyan-400{
-  --tw-gradient-to: #22d3ee var(--tw-gradient-to-position);
-}
-
 .group:hover .group-hover\:to-violet-500{
   --tw-gradient-to: #8b5cf6 var(--tw-gradient-to-position);
-}
-
-.group:hover .group-hover\:bg-clip-text{
-  background-clip: text;
-}
-
-.group\/card:hover .group-hover\/card\:text-neutral-300{
-  --tw-text-opacity: 1;
-  color: rgb(212 212 212 / var(--tw-text-opacity, 1));
-}
-
-.group\/card:hover .group-hover\/card\:text-white{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.group:hover .group-hover\:text-ai-teal-400{
-  --tw-text-opacity: 1;
-  color: rgb(51 255 243 / var(--tw-text-opacity, 1));
-}
-
-.group:hover .group-hover\:text-neutral-text{
-  --tw-text-opacity: 1;
-  color: rgb(229 229 229 / var(--tw-text-opacity, 1));
-}
-
-.group:hover .group-hover\:text-transparent{
-  color: transparent;
-}
-
-.group:hover .group-hover\:text-white{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .group\/icon:hover .group-hover\/icon\:text-white{
@@ -6670,12 +6515,31 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   color: rgb(51 146 255 / var(--tw-text-opacity, 1));
 }
 
+.group:hover .group-hover\:text-ai-teal-400{
+  --tw-text-opacity: 1;
+  color: rgb(51 255 243 / var(--tw-text-opacity, 1));
+}
+
 .group:hover .group-hover\:text-neutral-300{
   --tw-text-opacity: 1;
   color: rgb(212 212 212 / var(--tw-text-opacity, 1));
 }
 
+.group:hover .group-hover\:text-neutral-text{
+  --tw-text-opacity: 1;
+  color: rgb(229 229 229 / var(--tw-text-opacity, 1));
+}
+
+.group:hover .group-hover\:text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
 .group\/btn:hover .group-hover\/btn\:opacity-100{
+  opacity: 1;
+}
+
+.group\/icon:hover .group-hover\/icon\:opacity-100{
   opacity: 1;
 }
 
@@ -6691,16 +6555,12 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   opacity: 0.4;
 }
 
-.group:hover .group-hover\:opacity-70{
-  opacity: 0.7;
-}
-
-.group\/icon:hover .group-hover\/icon\:opacity-100{
-  opacity: 1;
-}
-
 .group:hover .group-hover\:opacity-60{
   opacity: 0.6;
+}
+
+.group:hover .group-hover\:opacity-70{
+  opacity: 0.7;
 }
 
 .group\/file:hover .group-hover\/file\:shadow-2xl{
@@ -6715,12 +6575,12 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.group:hover .group-hover\:ring-ai-blue-500\/50{
-  --tw-ring-color: rgb(10 132 255 / 0.5);
-}
-
 .group:hover .group-hover\:ring-ai-blue-500\/30{
   --tw-ring-color: rgb(10 132 255 / 0.3);
+}
+
+.group:hover .group-hover\:ring-ai-blue-500\/50{
+  --tw-ring-color: rgb(10 132 255 / 0.5);
 }
 
 .group:hover .group-hover\:blur-xl{
@@ -7454,12 +7314,16 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
     width: 50%;
   }
 
+  .sm\:w-1\/3{
+    width: 33.333333%;
+  }
+
   .sm\:w-10{
     width: 2.5rem;
   }
 
-  .sm\:w-24{
-    width: 6rem;
+  .sm\:w-2\/3{
+    width: 66.666667%;
   }
 
   .sm\:w-3\.5{
@@ -7516,14 +7380,6 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
 
   .sm\:w-auto{
     width: auto;
-  }
-
-  .sm\:w-1\/3{
-    width: 33.333333%;
-  }
-
-  .sm\:w-2\/3{
-    width: 66.666667%;
   }
 
   .sm\:max-w-4xl{
@@ -7616,6 +7472,10 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
     padding: 2.5rem;
   }
 
+  .sm\:p-12{
+    padding: 3rem;
+  }
+
   .sm\:p-2{
     padding: 0.5rem;
   }
@@ -7634,10 +7494,6 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
 
   .sm\:p-6{
     padding: 1.5rem;
-  }
-
-  .sm\:p-12{
-    padding: 3rem;
   }
 
   .sm\:px-3{
@@ -7705,6 +7561,16 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
     line-height: 2.25rem;
   }
 
+  .sm\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .sm\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
+  }
+
   .sm\:text-\[4\.5rem\]{
     font-size: 4.5rem;
   }
@@ -7722,16 +7588,6 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
   .sm\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .sm\:text-4xl{
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-
-  .sm\:text-5xl{
-    font-size: 3rem;
-    line-height: 1;
   }
 
   .sm\:text-xl{
@@ -7754,16 +7610,16 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
     left: 2rem;
   }
 
+  .md\:mb-0{
+    margin-bottom: 0px;
+  }
+
   .md\:mb-16{
     margin-bottom: 4rem;
   }
 
   .md\:mb-6{
     margin-bottom: 1.5rem;
-  }
-
-  .md\:mb-0{
-    margin-bottom: 0px;
   }
 
   .md\:block{
@@ -7822,12 +7678,12 @@ For typewriter effect: <span class="typewriter-text">Hello, AI Education Platfor
     width: 450px;
   }
 
-  .md\:w-full{
-    width: 100%;
-  }
-
   .md\:w-\[calc\(50\%-3rem\)\]{
     width: calc(50% - 3rem);
+  }
+
+  .md\:w-full{
+    width: 100%;
   }
 
   .md\:max-w-\[40\%\]{

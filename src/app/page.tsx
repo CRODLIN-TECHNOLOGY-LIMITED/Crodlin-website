@@ -99,8 +99,8 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-heading text-5xl md:text-6xl lg:text-6xl font-bold text-center mb-6 max-w-4xl tracking-tight font-heading"
           >
-            <span className="ai-gradient-text">Master AI</span> With Our 
-            <br />Interactive Learning Platform
+            <span className="ai-gradient-text">Precision</span> With Our 
+            <br />In Every Pixel
           </motion.h1>
           
           {/* Subtitle */}
@@ -108,7 +108,7 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-body text-lg md:text-xl text-neutral-accent text-center max-w-2xl mb-8 font-sans"
           >
-            Gain hands-on experience and build real AI projects through our immersive curriculum designed for maximum knowledge retention.
+            Bringing your ideas to life with cutting-edge design and scalable digital solutions. 
           </motion.p>
           
           {/* Animated code block */}
@@ -124,9 +124,9 @@ const HeroSection = () => {
               </div>
               <pre className="text-xs sm:text-sm pt-4 overflow-x-auto hide-scrollbar text-neutral-accent">
                 <code className="font-mono">
-                  <span className="text-ai-teal-400">import</span> <span className="text-ai-purple-400">AIEducation</span> <span className="text-ai-teal-400">from</span> <span className="text-orange-400">'ai-literacy'</span>
+                  <span className="text-ai-teal-400">import</span> <span className="text-ai-purple-400">BuildyourSoftwares</span> <span className="text-ai-teal-400">from</span> <span className="text-orange-400">'CRODLIN'</span>
                   <br /><br />
-                  <span className="text-ai-teal-400">const</span> <span className="text-ai-blue-400">myAI</span> = <span className="text-ai-teal-400">new</span> <span className="text-ai-purple-400">AIEducation</span>()
+                  <span className="text-ai-teal-400">const</span> <span className="text-ai-blue-400">your_website</span> = <span className="text-ai-teal-400">new</span> <span className="text-ai-purple-400">Website</span>()
                   <br />
                   <br />
                   <motion.span
@@ -135,7 +135,7 @@ const HeroSection = () => {
                     transition={{ duration: 3, delay: 1, ease: "easeInOut" }}
                     className="inline-block overflow-hidden whitespace-nowrap"
                   >
-                    <span className="text-ai-blue-400">myAI</span>.<span className="text-green-400">startLearning</span>()<span className="text-neutral-text">;</span>
+                    <span className="text-ai-blue-400">Crodlin</span>.<span className="text-green-400">startbuilding</span>()<span className="text-neutral-text">;</span>
                     <span className="ml-2 text-neutral-accent">// Your journey begins here!</span>
                   </motion.span>
                 </code>
@@ -151,20 +151,20 @@ const HeroSection = () => {
           >
             <Link href="/Login">
               <button className="relative group ai-button px-8 py-3 rounded-md text-lg font-medium overflow-hidden">
-                <span className="relative z-10">Get Started Free</span>
+                <span className="relative z-10">Get Your Website Today </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-ai-blue-500 to-ai-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </button>
             </Link>
             <Link href="/Login">
               <button className="px-8 py-3 bg-transparent border border-glass-border hover:border-ai-blue-500/50 rounded-md text-lg font-medium text-neutral-text transition-all hover:bg-glass-hover group">
-                <span>Prompt Now !!</span>
+                <span>View Packages !!</span>
                 <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
               </button>
             </Link>
           </motion.div>
           
           {/* Users count */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="flex items-center mt-10 bg-white/5 px-4 py-2 rounded-full"
           >
@@ -182,11 +182,11 @@ const HeroSection = () => {
             <div className="text-sm text-neutral-accent">
               <span className="text-white font-medium">10,000+</span> learners already enrolled
             </div>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
         
         {/* Scroll indicator */}
-        <motion.div 
+        {/* <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
@@ -202,7 +202,7 @@ const HeroSection = () => {
               />
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   );
@@ -1104,7 +1104,7 @@ const StatsSection = () => {
         />
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      {/* <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1148,14 +1148,14 @@ const StatsSection = () => {
                 </div>
               </div>
               
-              {/* Connector lines */}
+          
               {index < stats.length - 1 && (
                 <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-[1px] bg-white/10" />
               )}
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </div> */}
     </div>
   );
 };

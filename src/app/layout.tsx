@@ -6,7 +6,7 @@ import { Analytics } from '@vercel/analytics/react';
 import SessionWrapper from '@/components/SessionWrapper'
 import { Toaster } from "@/components/ui/toaster";
 import { UserProvider } from '@/app/context/Userinfo';
-import GetUserInfo from '@/components/GetUserInfo'; 
+// import GetUserInfo from '@/components/GetUserInfo'; 
 import { RoadmapProvider } from "@/app/context/RoadmapContext";
 import { SessionProvider } from 'next-auth/react';
 import { AuthProvider } from './context/AuthContext';
@@ -71,7 +71,7 @@ export default function RootLayout({
                   <main className="bg-black min-h-screen">
                     <SessionWrapper>
                       {/* <NavbarUse /> */}
-                      <GetUserInfo />
+                      {/* <GetUserInfo /> */}
                       <div className="relative z-10 overflow-auto">
                         {children}
                         <Analytics />
