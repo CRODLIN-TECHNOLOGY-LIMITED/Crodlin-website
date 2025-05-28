@@ -90,7 +90,7 @@ const HeroSection = () => {
             
             {/* "Most Popular" floating badge */}
             <div className="absolute -top-3 -right-3 bg-ai-purple-500 text-white text-xs px-2 py-1 rounded-md transform rotate-12 animate-pulse-subtle">
-              Most Popular
+              Starting @₹3999
             </div>
           </motion.div>
           
