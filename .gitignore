@@ -179,3 +179,4 @@ node_modules/
 .vscode-test/
 # VS Code extensions
 .vscode-extensions/
+.next

@@ -300,30 +300,7 @@ function Footer() {
               </ul>
             </motion.div>
             
-            <motion.div 
-              variants={itemVariants}
-              className="space-y-6"
-            >
-              <h3 className="text-sm font-semibold uppercase tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-ai-blue-500 to-ai-teal-500 font-heading">
-                Legal
-              </h3>
-              <ul className="space-y-4">
-                {legal.map((item, index) => (
-                  <motion.li 
-                    key={item.name}
-                    variants={listItemVariants}
-                    custom={index}
-                  >
-                    <Link href={item.href} className="group flex items-center">
-                      <ChevronRight className="w-3 h-3 text-ai-blue-500 opacity-0 -ml-4 mr-1 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
-                      <span className="text-neutral-400 hover:text-white transition-all duration-300 text-sm font-sans">
-                        {item.name}
-                      </span>
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+           
           </div>
           
           {/* Team section */}
