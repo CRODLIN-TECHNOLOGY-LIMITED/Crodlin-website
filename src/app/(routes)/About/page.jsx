@@ -114,13 +114,19 @@ export default function About() {
     }
   };
 
-  // Particle effect for hero section
-  const particles = Array.from({ length: 20 }).map((_, i) => ({
+  // Enhanced particle effect for hero section with more variety
+  const particles = Array.from({ length: 30 }).map((_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 20 + 10
+    size: Math.random() * 3 + 0.5,
+    duration: Math.random() * 15 + 8,
+    color: [
+      'rgba(59, 130, 246, 0.6)', // blue
+      'rgba(45, 212, 191, 0.6)', // teal
+      'rgba(168, 85, 247, 0.6)', // purple
+      'rgba(255, 255, 255, 0.4)' // white
+    ][Math.floor(Math.random() * 4)]
   }));
 
   return (
@@ -175,102 +181,152 @@ export default function About() {
         className="fixed top-3/4 right-1/3 transform translate-x-1/2 w-[400px] h-[400px] rounded-full bg-ai-purple-500/5 blur-[120px] -z-5"
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - Enhanced with better animations and layout */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="relative min-h-screen flex items-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="relative min-h-screen flex items-center pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
       >
         <div className="max-w-7xl mx-auto z-10">
           {/* Floating particles */}
           {particles.map(particle => (
             <motion.div
               key={particle.id}
-              className="absolute w-1 h-1 bg-white rounded-full opacity-50"
+              className="absolute rounded-full opacity-70"
               style={{
                 left: `${particle.x}%`,
                 top: `${particle.y}%`,
                 width: `${particle.size}px`,
-                height: `${particle.size}px`
+                height: `${particle.size}px`,
+                background: particle.color,
+                boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`
               }}
               animate={{
                 x: [
-                  Math.random() * 100 - 50,
-                  Math.random() * 100 - 50,
-                  Math.random() * 100 - 50
+                  Math.random() * 120 - 60,
+                  Math.random() * 120 - 60,
+                  Math.random() * 120 - 60
                 ],
                 y: [
-                  Math.random() * 100 - 50,
-                  Math.random() * 100 - 50,
-                  Math.random() * 100 - 50
+                  Math.random() * 120 - 60,
+                  Math.random() * 120 - 60,
+                  Math.random() * 120 - 60
                 ],
-                opacity: [0.2, 0.8, 0.2]
+                scale: [1, particle.size > 2 ? 1.5 : 1.2, 1],
+                opacity: [0.2, 0.7, 0.2]
               }}
               transition={{
                 duration: particle.duration,
                 repeat: Infinity,
-                repeatType: "reverse"
+                repeatType: "reverse",
+                ease: "easeInOut"
               }}
             />
           ))}
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-left"
             >
-              <div className="inline-block px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-sm text-white mb-6 border border-white/20">
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-sm text-white mb-6 border border-white/20 shadow-lg shadow-ai-teal-900/20"
+              >
                 <span className="flex items-center">
-                  <span className="w-2 h-2 rounded-full bg-ai-teal-400 mr-2 animate-pulse"></span>
-                  <span className="font-sans">Transforming AI Education</span>
-                </span>
-              </div>
-              
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 font-heading">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">
-                  About
-                </span>{" "}
-                <span className="relative">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-ai-blue-400 to-ai-teal-400">
-                    Ape.AI
+                  <span className="relative">
+                    <span className="absolute inset-0 rounded-full bg-ai-teal-400/30 animate-ping"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-ai-teal-400 mr-2.5 relative"></span>
                   </span>
-                  <motion.span 
-                    className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-ai-blue-500 to-ai-teal-500 rounded-full" 
+                  <span className="font-sans tracking-wide">Transforming AI Education</span>
+                </span>
+              </motion.div>
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-8 font-heading leading-tight">
+                <motion.span 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                  className="block mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-neutral-300"
+                >
+                  About
+                </motion.span>
+                <motion.span 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                  className="relative inline-block"
+                >
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-ai-blue-400 via-ai-teal-400 to-ai-blue-300">
+                    Crodlin
+                  </span>
+                  <motion.div 
+                    className="absolute -bottom-3 left-0 w-full h-1.5 bg-gradient-to-r from-ai-blue-500 via-ai-teal-500 to-ai-blue-400 rounded-full" 
                     initial={{ scaleX: 0, opacity: 0 }}
                     animate={{ scaleX: 1, opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 0.6 }}
+                    transition={{ delay: 1, duration: 0.8 }}
                   />
-                </span>
+                  <motion.div 
+                    className="absolute -bottom-3 left-0 w-full h-1.5 blur-sm bg-gradient-to-r from-ai-blue-500 via-ai-teal-500 to-ai-blue-400 rounded-full" 
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ scaleX: 1, opacity: 0.6 }}
+                    transition={{ delay: 1.2, duration: 0.8 }}
+                  />
+                </motion.span>
               </h1>
               
-              <p className="text-lg sm:text-xl text-neutral-300 max-w-xl leading-relaxed mb-8 font-sans">
-                Empowering learners worldwide through innovative AI-driven education solutions. 
-                Transform your learning journey with personalized paths and expert guidance.
-              </p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="text-lg sm:text-xl text-neutral-300 max-w-xl leading-relaxed mb-10 font-sans"
+              >
+                <span className="text-white font-medium">Empowering businesses worldwide</span> through innovative design and development solutions. 
+                We transform your digital presence with cutting-edge technology and expert craftsmanship to create experiences that resonate and perform.
+              </motion.p>
               
-              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.6 }}
+                className="flex flex-col sm:flex-row gap-5 mb-14"
+              >
                 <motion.a
                   href="#mission"
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-ai-blue-500 to-ai-teal-500 text-white font-medium flex items-center justify-center transition-all duration-300 shadow-lg shadow-ai-blue-900/20"
+                  whileHover={{ scale: 1.04, y: -3, boxShadow: "0 20px 40px -15px rgba(59, 130, 246, 0.4)" }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-7 py-3.5 rounded-xl bg-gradient-to-r from-ai-blue-500 to-ai-teal-500 text-white font-medium flex items-center justify-center transition-all duration-300 shadow-lg shadow-ai-blue-900/20 relative overflow-hidden group"
                 >
-                  Our Mission
-                  <ChevronRight className="w-4 h-4 ml-1" />
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-ai-teal-500 to-ai-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                  <span className="relative flex items-center z-10">
+                    Our Mission
+                    <ChevronRight className="w-5 h-5 ml-1.5 group-hover:ml-2.5 transition-all duration-300" />
+                  </span>
                 </motion.a>
                 
                 <motion.a
                   href="#team"
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-6 py-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium flex items-center justify-center hover:bg-white/10 transition-all duration-300"
+                  whileHover={{ scale: 1.04, y: -3 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-7 py-3.5 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium flex items-center justify-center hover:bg-white/10 transition-all duration-300 hover:border-white/30 group"
                 >
-                  Meet The Team
+                  <span className="flex items-center">
+                    Meet The Team
+                    <motion.span
+                      initial={{ opacity: 0, x: -10 }}
+                      whileHover={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronRight className="w-5 h-5 ml-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                    </motion.span>
+                  </span>
                 </motion.a>
-              </div>
+              </motion.div>
               
               {/* Interactive Stats Section */}
               <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/10">
@@ -420,47 +476,146 @@ export default function About() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
-        className="py-20 px-4 sm:px-6 lg:px-8"
+        viewport={{ once: true, margin: "-100px" }}
+        className="py-24 px-4 sm:px-6 lg:px-8 relative"
         id="mission"
       >
+        {/* Decorative elements */}
+        <div className="absolute left-0 top-0 w-full h-24 bg-gradient-to-b from-black to-transparent z-0" />
+        <div className="absolute left-0 bottom-0 w-full h-24 bg-gradient-to-t from-black to-transparent z-0" />
         <div className="max-w-7xl mx-auto">
           <motion.div 
             variants={itemVariants}
-            className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-8 sm:p-12 border border-white/10 overflow-hidden"
+            className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-8 sm:p-12 border border-white/10 overflow-hidden shadow-2xl shadow-ai-blue-900/10"
           >
-            {/* Ambient glow effects */}
-            <div className="absolute -top-40 -left-40 w-80 h-80 bg-ai-blue-500/10 rounded-full blur-[100px]" />
-            <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-ai-teal-500/10 rounded-full blur-[100px]" />
+            {/* Enhanced ambient glow effects */}
+            <motion.div 
+              animate={{
+                opacity: [0.05, 0.1, 0.05],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ duration: 8, repeat: Infinity, repeatType: "reverse" }}
+              className="absolute -top-40 -left-40 w-96 h-96 bg-ai-blue-500/10 rounded-full blur-[120px]" 
+            />
+            <motion.div 
+              animate={{
+                opacity: [0.05, 0.15, 0.05],
+                scale: [1, 1.15, 1]
+              }}
+              transition={{ duration: 10, repeat: Infinity, repeatType: "reverse", delay: 1 }}
+              className="absolute -bottom-40 -right-40 w-96 h-96 bg-ai-teal-500/10 rounded-full blur-[120px]" 
+            />
             
-            {/* Gradient border */}
-            <div className="absolute inset-0 rounded-2xl border border-white/10 bg-gradient-to-r from-ai-blue-500/[0.05] to-ai-teal-500/[0.05]" />
+            {/* Enhanced gradient border with animation */}
+            <motion.div 
+              animate={{
+                background: [
+                  "linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, rgba(45, 212, 191, 0.05) 100%)",
+                  "linear-gradient(180deg, rgba(59, 130, 246, 0.07) 0%, rgba(45, 212, 191, 0.07) 100%)",
+                  "linear-gradient(270deg, rgba(59, 130, 246, 0.05) 0%, rgba(45, 212, 191, 0.05) 100%)",
+                  "linear-gradient(0deg, rgba(59, 130, 246, 0.07) 0%, rgba(45, 212, 191, 0.07) 100%)",
+                  "linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, rgba(45, 212, 191, 0.05) 100%)"
+                ]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 rounded-2xl border border-white/10" 
+            />
             
             <div className="relative">
-              <div className="flex items-center mb-8">
-                <div className="mr-4 p-3 rounded-full bg-gradient-to-r from-ai-blue-500/20 to-ai-teal-500/20 backdrop-blur-md">
-                  <Sparkles className="w-6 h-6 text-ai-blue-400" />
-                </div>
-                <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-ai-blue-500 to-ai-teal-500">
-                  Our Mission
-                </h2>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0, y: -20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
+                className="flex items-center mb-10"
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="relative mr-5 p-4 rounded-xl bg-gradient-to-r from-ai-blue-500/20 to-ai-teal-500/20 backdrop-blur-md border border-white/10 shadow-lg shadow-ai-blue-900/10"
+                >
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 rounded-xl border border-white/10 overflow-hidden"
+                  >
+                    <div className="absolute top-0 left-0 w-2 h-2 bg-ai-blue-500/50 rounded-full" />
+                    <div className="absolute top-0 right-0 w-2 h-2 bg-ai-teal-500/50 rounded-full" />
+                    <div className="absolute bottom-0 left-0 w-2 h-2 bg-ai-purple-500/50 rounded-full" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 bg-ai-yellow-500/50 rounded-full" />
+                  </motion.div>
+                  <Sparkles className="w-7 h-7 text-ai-blue-400 relative z-10" />
+                </motion.div>
                 <div>
-                  <p className="text-lg text-neutral-300 leading-relaxed mb-6 font-sans">
-                    At Ape.AI, we're on a mission to revolutionize education through artificial intelligence. 
-                    We believe that everyone deserves access to high-quality education, and we're making that 
-                    possible by leveraging cutting-edge AI technology to create personalized learning experiences 
-                    that adapt to each student's needs and pace.
-                  </p>
-                  
-                  <p className="text-lg text-neutral-300 leading-relaxed font-sans">
-                    Our platform combines the expertise of top educators with the power of AI to deliver 
-                    comprehensive courses that are both engaging and effective. Through continuous innovation 
-                    and a commitment to excellence, we're building the future of education.
-                  </p>
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, x: -20 },
+                      visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.2 } }
+                    }}
+                    className="text-sm font-medium text-ai-blue-400 mb-1 uppercase tracking-wider"
+                  >
+                    Why we exist
+                  </motion.div>
+                  <motion.h2 
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.3 } }
+                    }}
+                    className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-blue-200 to-ai-teal-200"
+                  >
+                    Our Mission
+                  </motion.h2>
                 </div>
+              </motion.div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay: 0.2 } }
+                  }}
+                >
+                  <motion.p 
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: { opacity: 1, transition: { duration: 0.5, delay: 0.3 } }
+                    }}
+                    className="text-xl text-white leading-relaxed mb-8 font-sans border-l-4 border-ai-blue-500/50 pl-6 py-2"
+                  >
+                    At Crodlin, we're on a mission to <span className="text-ai-blue-400 font-medium">transform digital experiences</span> through innovative design and cutting-edge technology.
+                  </motion.p>
+                  
+                  <motion.p 
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: { opacity: 1, transition: { duration: 0.5, delay: 0.4 } }
+                    }}
+                    className="text-lg text-neutral-300 leading-relaxed mb-6 font-sans"
+                  >
+                    We believe that every business deserves a powerful digital presence that not only looks stunning but delivers measurable results. Our team combines creative expertise with technical excellence to craft websites and applications that stand out in today's competitive landscape.
+                  </motion.p>
+                  
+                  <motion.p 
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: { opacity: 1, transition: { duration: 0.5, delay: 0.5 } }
+                    }}
+                    className="text-lg text-neutral-300 leading-relaxed font-sans"
+                  >
+                    Through continuous innovation and a commitment to excellence, we're helping businesses of all sizes achieve their digital goals and create meaningful connections with their audiences.
+                  </motion.p>
+                  
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.7 } }
+                    }}
+                    className="mt-8 flex items-center"
+                  >
+                    <div className="h-px flex-grow bg-gradient-to-r from-ai-blue-500/50 to-transparent"></div>
+                    <span className="px-4 text-ai-blue-400 font-medium">Our Promise</span>
+                    <div className="h-px flex-grow bg-gradient-to-l from-ai-teal-500/50 to-transparent"></div>
+                  </motion.div>
+                </motion.div>
                 
                 <div className="relative">
                   {/* 3D floating blocks */}

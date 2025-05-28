@@ -1,4 +1,4 @@
-// File: /home/fareed-sayed/Documents/Crodlin/Crodlin-website/src/app/(routes)/About/page.jsx
+// File: C:\Project\Crodlin-website\src\app\(routes)\About\page.jsx
 import * as entry from '../../../../../src/app/(routes)/About/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
