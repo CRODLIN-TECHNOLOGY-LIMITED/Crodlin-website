@@ -1418,7 +1418,9 @@ export default function LandingPage() {
       <TestimonialsSection />
       <CTASection />
       <TechStackSection />
-      <ContactSection />
+      <section id="ContactSection">
+        <ContactSection />
+      </section>
       <Footer />
     </div>
     </>

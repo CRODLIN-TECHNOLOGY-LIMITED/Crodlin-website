@@ -1026,7 +1026,9 @@ export default function About() {
       {/* Contact Section */}
     </div>
      
+     <section id="ContactSection">
       <ContactSection/>
+      </section>
       <Footer/>
       </>
   );

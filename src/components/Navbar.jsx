@@ -3,10 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import img from '../../public/logo.png';
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isHomePage, setIsHomePage] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,7 +17,8 @@ function Navbar() {
   // Client-side only code
   useEffect(() => {
     setMounted(true);
-  }, []);
+    setIsHomePage(pathname === '/');
+  }, [pathname]);
 
   // Monitor scroll position
   useEffect(() => {
@@ -27,11 +29,6 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const path = window.location.pathname;
-    setIsHomePage(path === '/');
-  }, []);
-  
   const toggleMobileMenu = () => {
     setIsOpen((prevState) => !prevState);
   };
@@ -40,8 +37,37 @@ function Navbar() {
     { label: "Home", href: "/" },
     { label: "About", href: "/About" },
     { label: "Blog", href: "/Blog" },
-    { label: "Contact us", href: "" },
+    {
+      label: "Contact us",
+      href: "#contact",
+      isContact: true
+    },
   ];
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      // If on home page, scroll to contact section
+      const contactSection = document.getElementById("ContactSection");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+      // Close mobile menu if open
+      setIsOpen(false);
+    } else {
+      // If on other pages, navigate to home page then scroll to contact
+      router.push('/#contact');
+      // After navigation, scroll to contact section
+      setTimeout(() => {
+        const contactSection = document.getElementById("ContactSection");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500); // Small delay to allow page load
+      // Close mobile menu if open
+      setIsOpen(false);
+    }
+  };
 
   const getNavbarStyles = () => {
     if (isHomePage) {
@@ -150,8 +176,29 @@ function Navbar() {
                 {menuItems.map((item, index) => {
                   // Check if this menu item corresponds to the current path
                   const isActive = 
-                    (item.href === '/' && window.location.pathname === '/') || 
-                    (item.href !== '/' && window.location.pathname.startsWith(item.href));
+                    (item.href === '/' && pathname === '/') || 
+                    (item.href !== '/' && pathname.startsWith(item.href));
+                  
+                  if (item.isContact) {
+                    return (
+                      <motion.div
+                        key={item.href}
+                        variants={menuItemVariants}
+                        custom={index}
+                      >
+                        <a 
+                          href={item.href} 
+                          onClick={handleContactClick}
+                          className={`relative text-sm ${isActive ? 'text-white font-medium' : 'text-neutral-300'} hover:text-white transition-colors group font-medium cursor-pointer`}
+                        >
+                          {item.label}
+                          <span 
+                            className={`absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-ai-blue-500 to-ai-teal-500 transform ${isActive ? 'scale-x-100' : 'scale-x-0'} group-hover:scale-x-100 transition-transform duration-300`} 
+                          />
+                        </a>
+                      </motion.div>
+                    );
+                  }
                   
                   return (
                     <motion.div
@@ -212,24 +259,43 @@ function Navbar() {
               className="md:hidden overflow-hidden"
             >
               <div className="py-3 sm:py-4 border-t border-neutral-800/50 mt-2 space-y-2">
-                {menuItems.map((item) => (
-                  <motion.div
-                    key={item.href}
-                    variants={mobileMenuItemVariants}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <motion.span
-                        whileHover={{ x: 4 }}
-                        className="block px-4 py-2 text-sm text-neutral-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200 border border-transparent hover:border-white/10"
+                {menuItems.map((item) => {
+                  if (item.isContact) {
+                    return (
+                      <motion.div
+                        key={item.href}
+                        variants={mobileMenuItemVariants}
                       >
-                        {item.label}
-                      </motion.span>
-                    </Link>
-                  </motion.div>
-                ))}
+                        <a
+                          href={item.href}
+                          onClick={handleContactClick}
+                          className="block px-4 py-2 text-sm text-neutral-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200 border border-transparent hover:border-white/10 cursor-pointer"
+                        >
+                          {item.label}
+                        </a>
+                      </motion.div>
+                    );
+                  }
+                  
+                  return (
+                    <motion.div
+                      key={item.href}
+                      variants={mobileMenuItemVariants}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <motion.span
+                          whileHover={{ x: 4 }}
+                          className="block px-4 py-2 text-sm text-neutral-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200 border border-transparent hover:border-white/10"
+                        >
+                          {item.label}
+                        </motion.span>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>
