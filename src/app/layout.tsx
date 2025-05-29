@@ -2,16 +2,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/react';
-// import NavbarUse from "@/components/Navbar";
-import SessionWrapper from '@/components/SessionWrapper'
 import { Toaster } from "@/components/ui/toaster";
-import { UserProvider } from '@/app/context/Userinfo';
-import GetUserInfo from '@/components/GetUserInfo'; 
 import { RoadmapProvider } from "@/app/context/RoadmapContext";
-import { SessionProvider } from 'next-auth/react';
-import { AuthProvider } from './context/AuthContext';
-// import ChatAssistant from "@/components/search/ChatAssistant";
-import Footer from '@/components/Footer';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
@@ -36,54 +28,36 @@ export default function RootLayout({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate a loading delay
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000); // Adjust the delay as needed
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <html lang="en">
-      <head>
-        <title>My PWA</title>
-        <meta name="Ape.Ai" content="A PWA built with Love ❤️" />
-        <link rel="manifest" href="/manifest.json" />
+      <Head>
+        <title>Crodlin Technology</title>
+        <meta name="description" content="A best Software solutions" />
         <meta name="theme-color" content="#000000" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-      </head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" href="/logo.png" />
+        <link rel="icon" href="/favicon.ico" />
 
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
-      >
+      </Head>
+
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
         {isLoading ? (
           <div className="flex items-center justify-center min-h-screen">
-           <Image src="/logo.png" alt="logo" width={100} height={100} />
+            <Image src="/logo.png" alt="logo" width={100} height={100} />
           </div>
         ) : (
-          <SessionProvider>
-            <AuthProvider>
-              <UserProvider>
-                <RoadmapProvider> {/* Wrap the children with RoadmapProvider */}
-                  <main className="bg-black min-h-screen">
-                    <SessionWrapper>
-                      {/* <NavbarUse /> */}
-                      <GetUserInfo />
-                      <div className="relative z-10 overflow-auto">
-                        {children}
-                        <Analytics />
-                      </div>
-                    </SessionWrapper>
-                  </main>
-                  <Toaster />
-                </RoadmapProvider> {/* End of RoadmapProvider */}
-                <Footer/>
-                </UserProvider>
-            </AuthProvider>
-          </SessionProvider>
+          <RoadmapProvider>
+            <Toaster />
+            <Analytics />
+            {children}
+          </RoadmapProvider>
         )}
       </body>
     </html>

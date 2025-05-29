@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-import { useUserContext } from './context/Userinfo';
+// import { useUserContext } from './context/Userinfo';
 import Navbar from "@/components/Navbar";
 // Hero section with 3D mesh animation
 const HeroSection = () => {
@@ -1389,19 +1389,10 @@ const TechStackSection = () => {
 
 export default function LandingPage() {
   const router = useRouter();
-  const { contextisLoggedIn } = useUserContext();
+  // const { contextisLoggedIn } = useUserContext();
 
   // Redirect logged-in users to the Main page
-  useEffect(() => {
-    if (contextisLoggedIn) {
-      router.push('/Main');
-    }
-  }, [contextisLoggedIn, router]);
-
-  // If user is logged in, we're redirecting, so don't show the landing page content
-  if (contextisLoggedIn) {
-    return null;
-  }
+  
 
   return (
     <div className="bg-black text-white overflow-hidden">
