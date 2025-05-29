@@ -159,7 +159,7 @@ function Footer() {
                   </div>
                 </div>
                 <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400 transition-all duration-300 group-hover:from-ai-blue-400 group-hover:to-ai-teal-400 font-heading">
-                  Ape
+                  Crodlin Technology
                 </span>
               </div>
               

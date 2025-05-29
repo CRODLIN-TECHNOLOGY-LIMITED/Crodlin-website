@@ -1,9 +1,6 @@
 'use client';
 import localFont from "next/font/local";
 import "./globals.css";
-import { Analytics } from '@vercel/analytics/react';
-import { Toaster } from "@/components/ui/toaster";
-import { RoadmapProvider } from "@/app/context/RoadmapContext";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
@@ -44,21 +41,25 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/logo.png" />
         <link rel="icon" href="/favicon.ico" />
-
       </Head>
 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
         {isLoading ? (
-          <div className="flex items-center justify-center min-h-screen">
+          <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
             <Image src="/logo.png" alt="logo" width={100} height={100} />
+            <h1 className="mt-6 text-2xl font-bold tracking-wide">
+              Crodlin Tech
+            </h1>
+            <p className="mt-2 text-sm text-gray-400">
+               Precision in every pixel
+            </p>
           </div>
         ) : (
-          <RoadmapProvider>
-            <Toaster />
-            <Analytics />
+          <>
             {children}
-          </RoadmapProvider>
+          </>
         )}
+
       </body>
     </html>
   );

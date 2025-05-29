@@ -6,7 +6,13 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 // import { useUserContext } from './context/Userinfo';
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Head from 'next/head';
+import ContactSection from "@/components/Contact";
 // Hero section with 3D mesh animation
+
+  
+
 const HeroSection = () => {
   // Animation variants for staggered animations
   const containerVariants = {
@@ -208,7 +214,7 @@ const FeaturesSection = () => {
   });
 
   return (
-    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/80 via-black to-black/90">
+    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/80 via-black to-black/90-translate-y-100">
 
       {/* Background elements */}
       <div className="absolute inset-0 bg-dot-white/[0.2] -z-10" />
@@ -401,7 +407,7 @@ const LearningPathSection = () => {
   });
 
   return (
-    <div className="py-24 relative overflow-hidden bg-gradient-to-b from-black/90 via-black/95 to-black">
+    <div className="py-24 relative overflow-hidden bg-gradient-to-b from-black/90 via-black/95 to-black -translate-y-100">
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-ai-blue-900/5 via-ai-purple-900/10 to-transparent z-0" />
       <div className="absolute inset-0 bg-grid-small-white/[0.05] z-0" />
@@ -1390,11 +1396,20 @@ const TechStackSection = () => {
 export default function LandingPage() {
   const router = useRouter();
   // const { contextisLoggedIn } = useUserContext();
+  
 
   // Redirect logged-in users to the Main page
   
 
-  return (
+  return (  
+    <>
+      <Head>
+        <title>Home | Crodlin Technology</title>
+        <meta name="description" content="Crodlin Technology - Your gateway to mastering AI and technology." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      {/* <LandingPageContent /> */}
+    
     <div className="bg-black text-white overflow-hidden">
       <HeroSection />
       <FeaturesSection />
@@ -1403,6 +1418,9 @@ export default function LandingPage() {
       <TestimonialsSection />
       <CTASection />
       <TechStackSection />
+      <ContactSection />
+      <Footer />
     </div>
+    </>
   );
 }
