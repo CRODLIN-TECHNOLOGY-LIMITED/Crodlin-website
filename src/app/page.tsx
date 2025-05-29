@@ -11,7 +11,7 @@ import Head from 'next/head';
 import ContactSection from "@/components/Contact";
 // Hero section with 3D mesh animation
 
-  
+
 
 const HeroSection = () => {
   // Animation variants for staggered animations
@@ -214,8 +214,7 @@ const FeaturesSection = () => {
   });
 
   return (
-    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/80 via-black to-black/90-translate-y-100">
-
+    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/80 via-black to-black/90">
       {/* Background elements */}
       <div className="absolute inset-0 bg-dot-white/[0.2] -z-10" />
       <div className="absolute top-0 left-0 right-0 h-[200px] bg-gradient-to-b from-ai-blue-900/20 to-transparent -z-10" />
@@ -342,6 +341,9 @@ const FeaturesSection = () => {
           </Link>
         </motion.div>
       </div>
+
+      {/* Smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -407,14 +409,9 @@ const LearningPathSection = () => {
   });
 
   return (
-    <div className="py-24 relative overflow-hidden bg-gradient-to-b from-black/90 via-black/95 to-black -translate-y-100">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ai-blue-900/5 via-ai-purple-900/10 to-transparent z-0" />
-      <div className="absolute inset-0 bg-grid-small-white/[0.05] z-0" />
-
-      {/* Floating decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-ai-teal-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-ai-purple-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
+    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/90 via-black/95 to-black">
+      {/* Connect with previous section */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
@@ -564,6 +561,9 @@ const LearningPathSection = () => {
           </Link>
         </motion.div>
       </div>
+
+      {/* Smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -672,10 +672,12 @@ const TestimonialsSection = () => {
   }, [currentIndex, testimonials, isMobile]);
 
   return (
-    // Replace the opening div with:
-    <div className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-black via-black to-black/95">
+    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black via-black to-black/95">
       <Navbar />
-    
+
+      {/* Connect with previous section */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none" />
+
       <div className="absolute inset-0 bg-gradient-to-b from-ai-purple-900/10 via-ai-purple-900/5 to-transparent z-0" />
       <div className="absolute inset-0 bg-dot-white/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] z-0" />
 
@@ -816,10 +818,10 @@ const TestimonialsSection = () => {
                       ease: "easeInOut"
                     }}
                     className={`absolute top-0 transform ${testimonial.position === 0
-                        ? 'left-1/2 -translate-x-1/2'
-                        : testimonial.position === 1
-                          ? 'left-[60%] sm:left-[65%] lg:left-[60%] -translate-x-1/2'
-                          : 'left-[40%] sm:left-[35%] lg:left-[40%] -translate-x-1/2'
+                      ? 'left-1/2 -translate-x-1/2'
+                      : testimonial.position === 1
+                        ? 'left-[60%] sm:left-[65%] lg:left-[60%] -translate-x-1/2'
+                        : 'left-[40%] sm:left-[35%] lg:left-[40%] -translate-x-1/2'
                       }`}
                   >
                     <div
@@ -903,8 +905,8 @@ const TestimonialsSection = () => {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                        ? 'bg-ai-blue-500 w-4 sm:w-6'
-                        : 'bg-white/20 hover:bg-white/40'
+                      ? 'bg-ai-blue-500 w-4 sm:w-6'
+                      : 'bg-white/20 hover:bg-white/40'
                       }`}
                     aria-label={`Go to testimonial ${index + 1}`}
                   />
@@ -947,6 +949,9 @@ const TestimonialsSection = () => {
           </Link>
         </motion.div>
       </div>
+
+      {/* Smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -1137,7 +1142,10 @@ const CTASection = () => {
   });
 
   return (
-    <div className="py-24 relative overflow-hidden">
+    <div className="py-16 relative overflow-hidden">
+      {/* Connect with previous section */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none" />
+
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{
@@ -1297,6 +1305,9 @@ const CTASection = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -1328,7 +1339,10 @@ const TechStackSection = () => {
   const duplicatedTechs = [...techs, ...techs];
 
   return (
-    <div className="py-24 relative overflow-hidden bg-gradient-to-b from-black/90 to-black border-t border-glass-border">
+    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/90 to-black border-t border-glass-border">
+      {/* Connect with previous section */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none" />
+
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ai-blue-900/5 to-transparent" />
 
@@ -1395,34 +1409,30 @@ const TechStackSection = () => {
 
 export default function LandingPage() {
   const router = useRouter();
-  // const { contextisLoggedIn } = useUserContext();
-  
 
-  // Redirect logged-in users to the Main page
-  
-
-  return (  
+  return (
     <>
       <Head>
         <title>Home | Crodlin Technology</title>
         <meta name="description" content="Crodlin Technology - Your gateway to mastering AI and technology." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <LandingPageContent /> */}
-    
-    <div className="bg-black text-white overflow-hidden">
-      <HeroSection />
-      <FeaturesSection />
-      <StatsSection />
-      <LearningPathSection />
-      <TestimonialsSection />
-      <CTASection />
-      <TechStackSection />
-      <section id="ContactSection">
-        <ContactSection />
-      </section>
-      <Footer />
-    </div>
+
+      <div className="bg-black text-white overflow-hidden">
+        <HeroSection />
+        <div className="space-y-0"> {/* Remove default spacing between sections */}
+          <FeaturesSection />
+          <StatsSection />
+          <LearningPathSection />
+          <TestimonialsSection />
+          <CTASection />
+          <TechStackSection />
+        </div>
+        <section id="ContactSection">
+          <ContactSection />
+        </section>
+        <Footer />
+      </div>
     </>
   );
 }
