@@ -40,7 +40,7 @@ function Navbar() {
     { label: "Home", href: "/" },
     { label: "About", href: "/About" },
     { label: "Blog", href: "/Blog" },
-    { label: "Contact us ", href: "/Contact" },
+    { label: "Contact us", href: "/Contact" },
   ];
 
   const getNavbarStyles = () => {
