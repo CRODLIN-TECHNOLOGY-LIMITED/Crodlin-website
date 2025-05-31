@@ -181,7 +181,7 @@ const HeroSection = () => {
 
 // Custom hook for scroll direction
 const useScrollDirection = () => {
-  const [scrollDirection, setScrollDirection] = useState("down");
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
@@ -805,8 +805,8 @@ const TestimonialsSection = () => {
                     <button
                       onClick={() => setCurrentIndex(index)}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                          ? 'bg-ai-blue-500 w-4 sm:w-6'
-                          : 'bg-white/20 hover:bg-white/40'
+                        ? 'bg-ai-blue-500 w-4 sm:w-6'
+                        : 'bg-white/20 hover:bg-white/40'
                         }`}
                       aria-label={`Go to testimonial ${index + 1}`}
                     />
