@@ -38,7 +38,7 @@ const ContactSection = () => {
 
     try {
       // Replace the URL below with your own API endpoint
-      const response = await fetch('http://localhost:3000/api/sendEmail', {
+      const response = await fetch('https://crodlin-website.vercel.app/api/sendEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
