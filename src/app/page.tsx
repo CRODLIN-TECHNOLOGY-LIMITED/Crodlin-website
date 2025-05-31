@@ -27,6 +27,10 @@ const HeroSection = () => {
       transition: { duration: 0.6 }
     }
   };
+  const inView = useInView({
+    threshold: 0.2,
+    triggerOnce: true
+  });
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-black">
@@ -864,6 +868,10 @@ const StatsSection = () => {
     color: string;
     precision?: number;
   }
+  const inView = useInView({
+    threshold: 0.2,
+    triggerOnce: true
+  });
 
   const stats: Stat[] = [
     {
