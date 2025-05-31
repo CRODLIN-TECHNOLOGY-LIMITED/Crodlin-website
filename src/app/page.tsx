@@ -1457,6 +1457,7 @@ export default function LandingPage() {
 
   return (
     <div className="bg-black text-white overflow-hidden">
+      <Navbar />
       <HeroSection />
       <FeaturesSection />
       <LearningPathSection />
