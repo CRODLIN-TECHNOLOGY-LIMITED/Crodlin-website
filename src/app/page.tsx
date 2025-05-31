@@ -591,10 +591,14 @@ const TestimonialsSection = () => {
   ];
 
   // State and refs
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [direction, setDirection] = React.useState(0);
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [sectionRef, sectionInView] = useInView({
+    threshold: 0.2,
+    triggerOnce: false
+  });
 
   // Mobile detection
   useEffect(() => {
@@ -608,12 +612,13 @@ const TestimonialsSection = () => {
 
   // Auto-advance carousel
   useEffect(() => {
+    if (!sectionInView) return;
     const interval = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
     }, isMobile ? 7000 : 5000);
     return () => clearInterval(interval);
-  }, [testimonials.length, isMobile]);
+  }, [testimonials.length, isMobile, sectionInView]);
 
   // Navigation handlers
   const handlePrev = () => {
@@ -1455,7 +1460,7 @@ export default function LandingPage() {
       <HeroSection />
       <FeaturesSection />
       <LearningPathSection />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <CTASection />
       {/* <TechStackSection /> */}
     </div>

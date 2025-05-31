@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -57,8 +58,9 @@ export default function RootLayout({
           </div>
         ) : (
           <>
+
             {children}
-            {/* <Footer /> */}
+
           </>
         )}
 
