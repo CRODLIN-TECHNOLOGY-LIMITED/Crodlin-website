@@ -27,9 +27,9 @@ const HeroSection = () => {
       transition: { duration: 0.6 }
     }
   };
-  const inView = useInView({
-    threshold: 0.2,
-    triggerOnce: true
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
   });
 
   return (
@@ -868,9 +868,9 @@ const StatsSection = () => {
     color: string;
     precision?: number;
   }
-  const inView = useInView({
-    threshold: 0.2,
-    triggerOnce: true
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
   });
 
   const stats: Stat[] = [
