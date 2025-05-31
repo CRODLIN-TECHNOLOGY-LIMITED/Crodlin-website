@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail, MapPin, ChevronRight, ExternalLink, ArrowDown, Users, Sparkles, GraduationCap, Award } from 'lucide-react';
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
@@ -35,9 +34,11 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setShowError(false);
+    setShowSuccess(false);
 
     try {
-      const response = await fetch('https://formspree.io/f/mnndewed', {
+      // Replace the URL below with your own API endpoint
+      const response = await fetch('http://localhost:3000/api/sendEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,25 +47,24 @@ const ContactSection = () => {
       });
 
       if (response.ok) {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          message: ''
-        });
+        setFormData({ name: '', email: '', phone: '', message: '' });
         setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 3000);
+        setTimeout(() => setShowSuccess(false), 4000);
       } else {
-        throw new Error('Form submission failed');
+        const errorData = await response.json();
+        console.error('API error:', errorData);
+        setShowError(true);
+        setTimeout(() => setShowError(false), 4000);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Fetch error:', error);
       setShowError(true);
-      setTimeout(() => setShowError(false), 3000);
+      setTimeout(() => setShowError(false), 4000);
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <motion.section 
