@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
@@ -170,28 +170,85 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Enhanced scroll indicator with seamless blend */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-0 left-0 right-0 w-full"
-        >
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 z-20">
 
-            <div className="w-6 h-10 border-2 border-ai-blue-500/30 rounded-full flex justify-center">
-              <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-2 h-2 bg-ai-blue-500 rounded-full mt-1"
-              />
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       {/* Full-width gradient overlay for seamless transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
+      {/* <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-black via-black/80 to-transparent z-10" /> */}
     </div>
+  );
+};
+
+// Custom hook for scroll direction
+const useScrollDirection = () => {
+  const [scrollDirection, setScrollDirection] = useState("down");
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const updateScrollDirection = () => {
+      const scrollY = window.scrollY;
+      const direction = scrollY > lastScrollY ? "down" : "up";
+      if (direction !== scrollDirection) {
+        setScrollDirection(direction);
+      }
+      setLastScrollY(scrollY);
+    };
+    window.addEventListener("scroll", updateScrollDirection);
+    return () => {
+      window.removeEventListener("scroll", updateScrollDirection);
+    };
+  }, [scrollDirection, lastScrollY]);
+
+  return scrollDirection;
+};
+
+// Scroll-linked animation component
+interface ScrollAnimatedSectionProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+const ScrollAnimatedSection: React.FC<ScrollAnimatedSectionProps> = ({ children, className = "", delay = 0 }) => {
+  const controls = useAnimation();
+  const scrollDirection = useScrollDirection();
+  const [elementRef, elementInView] = useInView({
+    threshold: 0.2,
+    triggerOnce: false
+  });
+
+  useEffect(() => {
+    if (elementInView) {
+      controls.start({
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.8,
+          delay,
+          ease: [0.33, 1, 0.68, 1]
+        }
+      });
+    } else {
+      controls.start({
+        y: scrollDirection === "down" ? 100 : -100,
+        opacity: 0,
+        transition: {
+          duration: 0.4,
+          ease: [0.33, 1, 0.68, 1]
+        }
+      });
+    }
+  }, [elementInView, controls, scrollDirection, delay]);
+
+  return (
+    <motion.div
+      ref={elementRef}
+      initial={{ opacity: 0, y: 100 }}
+      animate={controls}
+      className={className}
+    >
+      {children}
+    </motion.div>
   );
 };
 
@@ -228,137 +285,102 @@ const FeaturesSection = () => {
     },
   ];
 
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   return (
     <div className="py-12 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full bg-dot-white/[0.2] -z-10" />
-
-      {/* Floating decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-ai-teal-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-ai-purple-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
-
-      {/* Decorative accent lines */}
-      <div className="absolute h-40 w-[1px] top-1/2 left-[5%] bg-gradient-to-b from-transparent via-ai-blue-500/20 to-transparent" />
-      <div className="absolute h-40 w-[1px] top-1/3 right-[5%] bg-gradient-to-b from-transparent via-ai-teal-500/20 to-transparent" />
-
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <ScrollAnimatedSection className="text-center mb-16">
           <motion.span
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6 }}
             className="inline-block px-3 py-1 text-sm bg-white/5 border border-white/10 rounded-full mb-4"
           >
             Learn Smarter, Not Harder
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
             className="text-heading text-3xl md:text-5xl font-bold mb-6 font-heading"
           >
             The <span className="ai-gradient-text">Future of Learning</span> is Here
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-body text-lg text-neutral-accent max-w-2xl mx-auto font-sans"
           >
             Our platform combines cutting-edge technology with proven educational methods
             to deliver an unparalleled learning experience.
           </motion.p>
+        </ScrollAnimatedSection>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feature, index) => (
+            <ScrollAnimatedSection
+              key={index}
+              delay={index * 0.1}
+              className="relative"
+            >
+              <motion.div
+                whileHover={{
+                  y: -8,
+                  transition: { duration: 0.2 }
+                }}
+                className={`group relative bg-transparent border border-white/10 rounded-xl overflow-hidden z-0`}
+              >
+                {/* Animated gradient background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`} />
+
+                {/* Background glow */}
+                <div className="absolute inset-0 bg-black opacity-80 -z-10" />
+
+                {/* Card content */}
+                <div className="p-6 relative z-10">
+                  {/* Icon with animated container */}
+                  <div className="w-14 h-14 rounded-lg glass flex items-center justify-center mb-5 group-hover:scale-110 transition-all duration-300">
+                    <span className="text-3xl">{feature.icon}</span>
+                  </div>
+
+                  <h3 className="text-heading text-xl font-semibold mb-3 group-hover:text-white transition-colors font-heading">
+                    {feature.title}
+                  </h3>
+                  <p className="text-body text-neutral-accent group-hover:text-neutral-text transition-colors font-sans">
+                    {feature.description}
+                  </p>
+
+                  {/* Animated learn more link */}
+                  <div className="mt-5 overflow-hidden">
+                    <Link href="/Login">
+                      <button className="text-ai-blue-400 flex items-center text-sm font-medium group-hover:translate-x-2 transition-transform duration-300">
+                        Learn more
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 ml-1 group-hover:ml-2 transition-all"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+                    </Link>
+                  </div>
+
+                  {/* Corner accent */}
+                  <div className={`absolute top-0 right-0 w-10 h-10 border-t border-r ${feature.borderColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  <div className={`absolute bottom-0 left-0 w-10 h-10 border-b border-l ${feature.borderColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                </div>
+              </motion.div>
+            </ScrollAnimatedSection>
+          ))}
         </div>
 
-        <motion.div
-          ref={ref}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.5,
-                delay: 0.2 + index * 0.1,
-              }}
-              whileHover={{
-                y: -8,
-                transition: { duration: 0.2 }
-              }}
-              className={`group relative bg-transparent border border-white/10 rounded-xl overflow-hidden z-0`}
-            >
-              {/* Animated gradient background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`} />
-
-              {/* Background glow */}
-              <div className="absolute inset-0 bg-black opacity-80 -z-10" />
-
-              {/* Card content */}
-              <div className="p-6 relative z-10">
-                {/* Icon with animated container */}
-                <div className="w-14 h-14 rounded-lg glass flex items-center justify-center mb-5 group-hover:scale-110 transition-all duration-300">
-                  <span className="text-3xl">{feature.icon}</span>
-                </div>
-
-                <h3 className="text-heading text-xl font-semibold mb-3 group-hover:text-white transition-colors font-heading">
-                  {feature.title}
-                </h3>
-                <p className="text-body text-neutral-accent group-hover:text-neutral-text transition-colors font-sans">
-                  {feature.description}
-                </p>
-
-                {/* Animated learn more link */}
-                <div className="mt-5 overflow-hidden">
-                  <Link href="/Login">
-                    <button className="text-ai-blue-400 flex items-center text-sm font-medium group-hover:translate-x-2 transition-transform duration-300">
-                      Learn more
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 ml-1 group-hover:ml-2 transition-all"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
-                  </Link>
-                </div>
-
-                {/* Corner accent */}
-                <div className={`absolute top-0 right-0 w-10 h-10 border-t border-r ${feature.borderColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                <div className={`absolute bottom-0 left-0 w-10 h-10 border-b border-l ${feature.borderColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
+        <ScrollAnimatedSection className="mt-16 text-center">
           <Link href="/Login">
             <button className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-xl hover:shadow-ai-blue-500/10">
               Explore All Features
               <span className="ml-2">→</span>
             </button>
           </Link>
-        </motion.div>
+        </ScrollAnimatedSection>
       </div>
     </div>
   );
@@ -419,80 +441,48 @@ const LearningPathSection = () => {
     },
   ];
 
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   return (
     <div className="py-12 relative overflow-hidden bg-black">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ai-purple-900/10 to-transparent z-0" />
-      <div className="absolute inset-0 bg-grid-small-white/[0.05] z-0" />
-
-      {/* Floating decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-ai-teal-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-ai-purple-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
-
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <ScrollAnimatedSection className="text-center mb-16">
           <motion.span
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6 }}
             className="inline-block px-3 py-1 text-sm bg-white/5 border border-white/10 rounded-full mb-4"
           >
             Step-by-Step Growth
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
             className="text-heading text-3xl md:text-5xl font-bold mb-6 font-heading"
           >
             Your AI <span className="ai-gradient-text">Learning Journey</span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-body text-lg text-neutral-accent max-w-2xl mx-auto font-sans"
           >
             From beginner to expert, our structured approach ensures you gain both theoretical knowledge
             and practical skills in artificial intelligence.
           </motion.p>
-        </div>
+        </ScrollAnimatedSection>
 
-        <motion.div
-          ref={ref}
-          className="relative"
-        >
-          {/* Connecting line with animated gradient */}
+        <div className="relative">
           <motion.div
             initial={{ height: "0%" }}
-            animate={inView ? { height: "100%" } : {}}
+            animate={{ height: "100%" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-ai-blue-500 via-ai-purple-500 to-ai-teal-500 hidden md:block z-0"
           />
 
           <div className="space-y-24 md:space-y-32">
             {steps.map((step, index) => (
-              <motion.div
+              <ScrollAnimatedSection
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.3 + index * 0.2,
-                  ease: "easeOut"
-                }}
+                delay={index * 0.2}
                 className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}
               >
                 {/* Content side */}
                 <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:text-right md:pr-16' : 'md:text-left md:pl-16'} relative z-10`}>
                   <motion.div
                     initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 + index * 0.2 }}
                     className="mb-6"
                   >
@@ -511,7 +501,7 @@ const LearningPathSection = () => {
                 <div className="relative w-full md:w-2/12 flex justify-center py-8 md:py-0">
                   <motion.div
                     initial={{ scale: 0, rotate: -180 }}
-                    animate={inView ? { scale: 1, rotate: 0 } : {}}
+                    animate={{ scale: 1, rotate: 0 }}
                     transition={{
                       type: "spring",
                       stiffness: 260,
@@ -551,36 +541,10 @@ const LearningPathSection = () => {
 
                 {/* Empty space to balance the layout on desktop */}
                 <div className="hidden md:block w-5/12"></div>
-              </motion.div>
+              </ScrollAnimatedSection>
             ))}
           </div>
-        </motion.div>
-
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="mt-16 text-center"
-        >
-          <Link href="/Login">
-            <button className="relative px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-xl hover:shadow-ai-blue-500/10 group overflow-hidden">
-              <span className="relative z-10 flex items-center justify-center">
-                Start Your Journey
-                <svg className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-
-              {/* Button highlight effects */}
-              <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-to-r from-ai-blue-500 to-ai-teal-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-              <div className="absolute top-0 right-0 h-0.5 w-full bg-gradient-to-r from-ai-teal-500 to-ai-blue-500 transform origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-            </button>
-          </Link>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -626,42 +590,32 @@ const TestimonialsSection = () => {
     },
   ];
 
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  // State to track current testimonial index
+  // State and refs
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [direction, setDirection] = React.useState(0); // -1 for left, 1 for right
+  const [direction, setDirection] = React.useState(0);
   const [isMobile, setIsMobile] = React.useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Detect mobile view
-  React.useEffect(() => {
+  // Mobile detection
+  useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
-    // Initial check
     checkMobile();
-
-    // Add resize listener
     window.addEventListener('resize', checkMobile);
-
-    // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Auto-advance carousel (slower on mobile)
-  React.useEffect(() => {
+  // Auto-advance carousel
+  useEffect(() => {
     const interval = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, isMobile ? 7000 : 5000); // Slower on mobile for better reading time
+    }, isMobile ? 7000 : 5000);
     return () => clearInterval(interval);
   }, [testimonials.length, isMobile]);
 
-  // Handle manual navigation
+  // Navigation handlers
   const handlePrev = () => {
     setDirection(-1);
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
@@ -672,18 +626,15 @@ const TestimonialsSection = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
   };
 
-  // Calculate visible testimonials based on screen size
-  const visibleTestimonials = React.useMemo(() => {
+  // Calculate visible testimonials
+  const visibleTestimonials = useMemo(() => {
     const result = [];
-
-    // On mobile, show just one testimonial, on larger screens show more
     const cardsToShow = isMobile ? 1 : (window.innerWidth < 1024 ? 2 : 3);
-
     for (let i = 0; i < cardsToShow; i++) {
       const index = (currentIndex + i) % testimonials.length;
       result.push({
         ...testimonials[index],
-        position: i, // 0 = current, 1 = next, 2 = next+1
+        position: i,
       });
     }
     return result;
@@ -691,160 +642,97 @@ const TestimonialsSection = () => {
 
   return (
     <div className="py-12 relative overflow-hidden">
-      <Navbar />
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-ai-purple-900/10 to-black z-0" />
-      <div className="absolute inset-0 bg-dot-white/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] z-0" />
-
-      {/* Animated light beams */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          initial={{ opacity: 0, rotate: -45, scale: 0.8 }}
-          animate={{ opacity: [0.1, 0.2, 0.1], rotate: -45, scale: 1 }}
-          transition={{ duration: 5, repeat: Infinity }}
-          className="absolute -top-24 -right-24 w-72 md:w-96 h-72 md:h-96 bg-gradient-to-t from-ai-blue-500/0 to-ai-blue-500/10 blur-lg"
-        />
-        <motion.div
-          initial={{ opacity: 0, rotate: 45, scale: 0.8 }}
-          animate={{ opacity: [0.1, 0.2, 0.1], rotate: 45, scale: 1 }}
-          transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-          className="absolute -bottom-24 -left-24 w-72 md:w-96 h-72 md:h-96 bg-gradient-to-b from-ai-teal-500/0 to-ai-teal-500/10 blur-lg"
-        />
-      </div>
-
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-8 md:mb-16">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6 }}
-            className="inline-block px-3 py-1 text-sm bg-white/5 border border-white/10 rounded-full mb-4"
-          >
-            Hear From Our Community
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-heading text-3xl md:text-5xl font-bold mb-4 md:mb-6 font-heading"
-          >
-            Success <span className="ai-gradient-text">Stories</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-body text-base md:text-lg text-neutral-accent max-w-2xl mx-auto font-sans"
-          >
-            Join thousands of learners who have transformed their careers through our platform.
-          </motion.p>
-        </div>
+        <ScrollAnimatedSection>
+          <div className="text-center mb-8 md:mb-16">
+            <motion.span className="inline-block px-3 py-1 text-sm bg-white/5 border border-white/10 rounded-full mb-4">
+              Hear From Our Community
+            </motion.span>
+            <motion.h2 className="text-heading text-3xl md:text-5xl font-bold mb-4 md:mb-6 font-heading">
+              Success <span className="ai-gradient-text">Stories</span>
+            </motion.h2>
+            <motion.p className="text-body text-base md:text-lg text-neutral-accent max-w-2xl mx-auto font-sans">
+              Join thousands of learners who have transformed their careers through our platform.
+            </motion.p>
+          </div>
+        </ScrollAnimatedSection>
 
-        {/* Testimonial Carousel - Simplified on mobile */}
-        <motion.div
-          ref={ref}
-          className="relative w-full mx-auto"
-        >
+        <div className="relative w-full mx-auto" ref={carouselRef}>
           <div className="relative py-4 md:py-8">
-            {/* Mobile-optimized testimonial view */}
+            {/* Mobile view */}
             {isMobile && (
               <div className="flex justify-center items-center">
-                <motion.div
-                  key={`mobile-${testimonials[currentIndex].name}`}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
-                  className="w-full max-w-[300px] mx-auto"
-                >
-                  <div className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 backdrop-blur-md rounded-xl overflow-hidden relative">
-                    <div className="p-5">
-                      {/* Quote */}
-                      <div className="relative">
-                        <svg className="absolute top-0 left-0 w-6 h-6 text-ai-blue-500/20 transform -translate-x-2 -translate-y-2"
-                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-                        </svg>
-                        <p className="text-neutral-text text-sm pt-4 italic mb-4 relative z-10 min-h-[80px]">
-                          "{testimonials[currentIndex].quote}"
-                        </p>
-                      </div>
-
-                      {/* Rating */}
-                      <div className="flex items-center mb-4">
-                        {[...Array(5)].map((_, i) => (
-                          <svg
-                            key={i}
-                            className={`w-4 h-4 ${i < testimonials[currentIndex].rating ? 'text-yellow-400' : 'text-neutral-600'}`}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        ))}
-                      </div>
-
-                      {/* User */}
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 rounded-full overflow-hidden mr-3 border-2 border-ai-teal-500/50">
-                          <img
-                            src={testimonials[currentIndex].image}
-                            alt={testimonials[currentIndex].name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div>
-                          <h4 className="text-heading text-sm font-semibold font-heading">{testimonials[currentIndex].name}</h4>
-                          <p className="text-xs text-neutral-accent font-sans">{testimonials[currentIndex].role}</p>
-                        </div>
-                      </div>
-
-                      {/* Decorative elements */}
-                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-ai-blue-500/30 blur-sm" />
-                      <div className="absolute -bottom-4 -left-4 w-12 h-12 rounded-full bg-ai-teal-500/10 blur-lg" />
+                <ScrollAnimatedSection className="w-full max-w-[300px] mx-auto">
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 backdrop-blur-md rounded-xl overflow-hidden relative p-5">
+                    {/* Quote */}
+                    <div className="relative">
+                      <svg className="absolute top-0 left-0 w-6 h-6 text-ai-blue-500/20 transform -translate-x-2 -translate-y-2"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+                      </svg>
+                      <p className="text-neutral-text text-sm pt-4 italic mb-4 relative z-10 min-h-[80px]">
+                        "{testimonials[currentIndex].quote}"
+                      </p>
                     </div>
+
+                    {/* Rating */}
+                    <div className="flex items-center mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className={`w-4 h-4 ${i < testimonials[currentIndex].rating ? 'text-yellow-400' : 'text-neutral-600'}`}
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+
+                    {/* User */}
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded-full overflow-hidden mr-3 border-2 border-ai-teal-500/50">
+                        <img
+                          src={testimonials[currentIndex].image}
+                          alt={testimonials[currentIndex].name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="text-heading text-sm font-semibold font-heading">{testimonials[currentIndex].name}</h4>
+                        <p className="text-xs text-neutral-accent font-sans">{testimonials[currentIndex].role}</p>
+                      </div>
+                    </div>
+
+                    {/* Decorative elements */}
+                    <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-ai-blue-500/30 blur-sm" />
+                    <div className="absolute -bottom-4 -left-4 w-12 h-12 rounded-full bg-ai-teal-500/10 blur-lg" />
                   </div>
-                </motion.div>
+                </ScrollAnimatedSection>
               </div>
             )}
 
-            {/* Desktop carousel view */}
+            {/* Desktop view */}
             {!isMobile && (
               <div className="flex justify-center h-[380px]">
                 {visibleTestimonials.map((testimonial, index) => (
-                  <motion.div
+                  <ScrollAnimatedSection
                     key={`${testimonial.name}-${testimonial.position}`}
-                    initial={{
-                      opacity: 0,
-                      scale: 0.8,
-                      x: direction * 100
-                    }}
-                    animate={{
-                      opacity: testimonial.position === 0 ? 1 : 0.7 - (testimonial.position * 0.2),
-                      scale: testimonial.position === 0 ? 1 : 0.9 - (testimonial.position * 0.05),
-                      x: 0,
-                      y: testimonial.position === 0 ? 0 : testimonial.position === 1 ? 20 : 40,
-                      zIndex: 30 - testimonial.position * 10
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      ease: "easeInOut"
-                    }}
-                    className={`absolute top-0 transform ${testimonial.position === 0
-                      ? 'left-1/2 -translate-x-1/2'
-                      : testimonial.position === 1
-                        ? 'left-[60%] sm:left-[65%] lg:left-[60%] -translate-x-1/2'
-                        : 'left-[40%] sm:left-[35%] lg:left-[40%] -translate-x-1/2'
-                      }`}
+                    delay={index * 0.1}
                   >
                     <div
-                      className={`w-[280px] sm:w-[340px] md:w-[360px] lg:w-[400px] backdrop-blur-md rounded-xl overflow-hidden relative
-                                ${testimonial.position === 0
+                      className={`w-[280px] sm:w-[340px] md:w-[360px] lg:w-[400px] backdrop-blur-md rounded-xl overflow-hidden relative absolute top-0 transform
+                        ${testimonial.position === 0
+                          ? 'left-1/2 -translate-x-1/2'
+                          : testimonial.position === 1
+                            ? 'left-[60%] sm:left-[65%] lg:left-[60%] -translate-x-1/2'
+                            : 'left-[40%] sm:left-[35%] lg:left-[40%] -translate-x-1/2'
+                        } ${testimonial.position === 0
                           ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/20'
-                          : 'bg-white/5 border border-white/10'}`}
+                          : 'bg-white/5 border border-white/10'
+                        }`}
                     >
-                      {/* Content */}
                       <div className="p-4 xs:p-5 sm:p-6">
                         {/* Quote */}
                         <div className="relative">
@@ -886,82 +774,75 @@ const TestimonialsSection = () => {
                       <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-ai-blue-500/30 blur-sm" />
                       <div className="absolute -bottom-4 -left-4 w-12 h-12 rounded-full bg-ai-teal-500/10 blur-lg" />
                     </div>
-                  </motion.div>
+                  </ScrollAnimatedSection>
                 ))}
               </div>
             )}
 
-            {/* Navigation controls - Improved for better mobile experience */}
+            {/* Navigation */}
             <div className="flex justify-center items-center space-x-2 sm:space-x-4 mt-6">
-              {/* Touch-friendly buttons with improved tap targets */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={handlePrev}
-                className="p-2 sm:p-3 rounded-full bg-white/5 border border-white/20 hover:bg-white/10 transition-colors hover:border-white/30"
-                aria-label="Previous testimonial"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <ScrollAnimatedSection>
+                <button
+                  onClick={handlePrev}
+                  className="p-2 sm:p-3 rounded-full bg-white/5 border border-white/20 hover:bg-white/10 transition-colors hover:border-white/30"
+                  aria-label="Previous testimonial"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </motion.button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+              </ScrollAnimatedSection>
 
-              {/* Dots indicator - Improved mobile experience */}
               <div className="flex space-x-1 sm:space-x-2">
                 {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                      ? 'bg-ai-blue-500 w-4 sm:w-6'
-                      : 'bg-white/20 hover:bg-white/40'
-                      }`}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
+                  <ScrollAnimatedSection key={index}>
+                    <button
+                      onClick={() => setCurrentIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
+                          ? 'bg-ai-blue-500 w-4 sm:w-6'
+                          : 'bg-white/20 hover:bg-white/40'
+                        }`}
+                      aria-label={`Go to testimonial ${index + 1}`}
+                    />
+                  </ScrollAnimatedSection>
                 ))}
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={handleNext}
-                className="p-2 sm:p-3 rounded-full bg-white/5 border border-white/20 hover:bg-white/10 transition-colors hover:border-white/30"
-                aria-label="Next testimonial"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <ScrollAnimatedSection>
+                <button
+                  onClick={handleNext}
+                  className="p-2 sm:p-3 rounded-full bg-white/5 border border-white/20 hover:bg-white/10 transition-colors hover:border-white/30"
+                  aria-label="Next testimonial"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </motion.button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </ScrollAnimatedSection>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* CTA Button - Improved responsive design */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-10 text-center"
-        >
+        <ScrollAnimatedSection className="mt-10 text-center">
           <Link href="/Login">
             <button className="px-5 sm:px-6 py-2 sm:py-2.5 bg-white/5 border border-white/10 hover:border-white/20 rounded-xl text-white font-medium transition-all duration-300 hover:shadow-xl hover:shadow-ai-blue-500/10 group">
               Join Our Community
               <span className="ml-2 group-hover:ml-3 transition-all">→</span>
             </button>
           </Link>
-        </motion.div>
+        </ScrollAnimatedSection>
       </div>
     </div>
   );
@@ -1015,11 +896,6 @@ const StatsSection = () => {
     },
   ];
 
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   // Custom counter component with animation
   interface CounterProps {
     startValue: number;
@@ -1034,25 +910,23 @@ const StatsSection = () => {
     const [count, setCount] = React.useState(startValue);
 
     React.useEffect(() => {
-      if (inView) {
-        let startTimestamp: number | undefined;
-        const duration = 2000; // 2 seconds animation
+      let startTimestamp: number | undefined;
+      const duration = 2000; // 2 seconds animation
 
-        const step = (timestamp: number) => {
-          if (!startTimestamp) startTimestamp = timestamp;
-          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-          const currentCount = progress * (endValue - startValue) + startValue;
+      const step = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const currentCount = progress * (endValue - startValue) + startValue;
 
-          setCount(currentCount);
+        setCount(currentCount);
 
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          }
-        };
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
 
-        window.requestAnimationFrame(step);
-        controls.start({ opacity: 1, scale: 1 });
-      }
+      window.requestAnimationFrame(step);
+      controls.start({ opacity: 1, scale: 1 });
     }, [inView, startValue, endValue]);
 
     return (
@@ -1436,46 +1310,20 @@ const TechStackSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8 md:mb-10 lg:mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 font-heading"
-          >
+          <ScrollAnimatedSection className="text-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 font-heading">
             Master Today's <span className="ai-gradient-text">Leading AI Technologies</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-body text-sm sm:text-base md:text-lg text-neutral-accent max-w-2xl mx-auto font-sans"
-          >
+          </ScrollAnimatedSection>
+          <ScrollAnimatedSection className="text-body text-sm sm:text-base md:text-lg text-neutral-accent max-w-2xl mx-auto font-sans">
             Stay ahead of the curve with our comprehensive curriculum covering the latest AI tools and frameworks.
-          </motion.p>
+          </ScrollAnimatedSection>
         </div>
 
         {/* Infinite scroll container - First row - with performance optimizations */}
         <div className="relative w-full overflow-hidden mb-4 md:mb-6">
-          <motion.div
-            className="flex"
-            animate={scrollLeftAnimation}
-            style={{
-              width: "max-content",
-              ...optimizedScrollStyle
-            }}
-          >
+          <ScrollAnimatedSection className="flex" delay={0.2}>
             {duplicatedTechs.map((tech, index) => (
-              <motion.div
+              <ScrollAnimatedSection
                 key={`row1-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: Math.min(index * 0.03, 0.9) // Cap the delay for better performance
-                }}
-                viewport={{ once: true }}
                 className="flex-shrink-0 mx-1.5 sm:mx-2 md:mx-3"
               >
                 <div className="glass p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl w-[110px] sm:w-[130px] md:w-[160px] lg:w-[180px] text-center group hover:border-ai-teal-500/30 transition-all duration-300 font-sans transform hover:translate-y-[-2px]">
@@ -1486,9 +1334,9 @@ const TechStackSection = () => {
                     {tech.name}
                   </h3>
                 </div>
-              </motion.div>
+              </ScrollAnimatedSection>
             ))}
-          </motion.div>
+          </ScrollAnimatedSection>
 
           {/* Gradient overlays for fade effect */}
           <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 md:w-24 lg:w-32 bg-gradient-to-r from-black to-transparent z-10" />
@@ -1497,24 +1345,10 @@ const TechStackSection = () => {
 
         {/* Second row - moving in opposite direction - with performance optimizations */}
         <div className="relative w-full overflow-hidden">
-          <motion.div
-            className="flex"
-            animate={scrollRightAnimation}
-            style={{
-              width: "max-content",
-              ...optimizedScrollStyle
-            }}
-          >
+          <ScrollAnimatedSection className="flex" delay={0.4}>
             {duplicatedTechs.slice().reverse().map((tech, index) => (
-              <motion.div
+              <ScrollAnimatedSection
                 key={`row2-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: Math.min(index * 0.03, 0.9) // Cap the delay for better performance
-                }}
-                viewport={{ once: true }}
                 className="flex-shrink-0 mx-1.5 sm:mx-2 md:mx-3"
               >
                 <div className="glass p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl w-[110px] sm:w-[130px] md:w-[160px] lg:w-[180px] text-center group hover:border-ai-blue-500/30 transition-all duration-300 font-sans transform hover:translate-y-[-2px]">
@@ -1525,9 +1359,9 @@ const TechStackSection = () => {
                     {tech.name}
                   </h3>
                 </div>
-              </motion.div>
+              </ScrollAnimatedSection>
             ))}
-          </motion.div>
+          </ScrollAnimatedSection>
 
           {/* Gradient overlays for fade effect */}
           <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 md:w-24 lg:w-32 bg-gradient-to-r from-black to-transparent z-10" />
@@ -1606,6 +1440,15 @@ export default function LandingPage() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
+  // Smooth scroll setup
+  useEffect(() => {
+    // Enable smooth scrolling
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
 
   return (
     <div className="bg-black text-white overflow-hidden">
