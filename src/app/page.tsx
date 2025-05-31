@@ -1,18 +1,11 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-// import { useUserContext } from './context/Userinfo';
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Head from 'next/head';
-import ContactSection from "@/components/Contact";
 // Hero section with 3D mesh animation
-
-
-
 const HeroSection = () => {
   // Animation variants for staggered animations
   const containerVariants = {
@@ -37,11 +30,16 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-black">
+      {/* Background elements with improved gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-transparent z-0" />
-      <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 w-full h-[300px] bg-gradient-to-t from-ai-blue-900/20 via-ai-teal-500/10 to-transparent blur-[80px] z-0" />
-      <div className="relative z-10 container mx-auto flex flex-col items-center" />
 
-      {/* Animated particles */}
+      {/* Grid background with smoother fade-out */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-grid-small-white/[0.2]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent from-0% via-80% to-black to-100%" />
+      </div>
+
+      {/* Animated particles with software-themed colors */}
       <div className="absolute inset-0 z-0">
         {[...Array(20)].map((_, index) => (
           <motion.div
@@ -66,7 +64,7 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* Animated spotlight effect */}
+      {/* Enhanced spotlight effects with smoother blend */}
       <div className="absolute -left-20 -top-20 z-0">
         <div className="relative w-[600px] h-[600px] bg-ai-blue-500/20 rounded-full blur-[120px] animate-pulse-subtle" />
       </div>
@@ -90,13 +88,13 @@ const HeroSection = () => {
             <span className="px-6 py-2 bg-ai-blue-500/10 border border-ai-blue-500/30 rounded-full flex items-center">
               <span className="animate-pulse w-2 h-2 rounded-full bg-ai-teal-500 mr-2" />
               <span className="text-sm text-neutral-text">
-                Next Generation AI Education Platform
+                Innovative Software Solutions
               </span>
             </span>
 
-            {/* "Most Popular" floating badge */}
+            {/* "Most Trusted" floating badge */}
             <div className="absolute -top-3 -right-3 bg-ai-purple-500 text-white text-xs px-2 py-1 rounded-md transform rotate-12 animate-pulse-subtle">
-              Starting @₹3999
+              Most Trusted
             </div>
           </motion.div>
 
@@ -105,8 +103,9 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-heading text-5xl md:text-6xl lg:text-6xl font-bold text-center mb-6 max-w-4xl tracking-tight font-heading"
           >
-            <span className="ai-gradient-text">Precision</span> With Our
-            <br />In Every Pixel
+            Transform Your Ideas Into
+            <br />
+            <span className="ai-gradient-text">Powerful Software Solutions</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -114,7 +113,7 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-body text-lg md:text-xl text-neutral-accent text-center max-w-2xl mb-8 font-sans"
           >
-            Bringing your ideas to life with cutting-edge design and scalable digital solutions.
+            Partner with Crodlin Technology to build innovative, scalable, and user-centric software products that drive your business forward.
           </motion.p>
 
           {/* Animated code block */}
@@ -130,9 +129,9 @@ const HeroSection = () => {
               </div>
               <pre className="text-xs sm:text-sm pt-4 overflow-x-auto hide-scrollbar text-neutral-accent">
                 <code className="font-mono">
-                  <span className="text-ai-teal-400">import</span> <span className="text-ai-purple-400">BuildyourSoftwares</span> <span className="text-ai-teal-400">from</span> <span className="text-orange-400">'CRODLIN'</span>
+                  <span className="text-ai-teal-400">import</span> <span className="text-ai-purple-400">CrodlinTech</span> <span className="text-ai-teal-400">from</span> <span className="text-orange-400">'@crodlin/core'</span>
                   <br /><br />
-                  <span className="text-ai-teal-400">const</span> <span className="text-ai-blue-400">your_website</span> = <span className="text-ai-teal-400">new</span> <span className="text-ai-purple-400">Website</span>()
+                  <span className="text-ai-teal-400">const</span> <span className="text-ai-blue-400">project</span> = <span className="text-ai-teal-400">new</span> <span className="text-ai-purple-400">CrodlinTech</span>()
                   <br />
                   <br />
                   <motion.span
@@ -141,8 +140,8 @@ const HeroSection = () => {
                     transition={{ duration: 3, delay: 1, ease: "easeInOut" }}
                     className="inline-block overflow-hidden whitespace-nowrap"
                   >
-                    <span className="text-ai-blue-400">Crodlin</span>.<span className="text-green-400">startbuilding</span>()<span className="text-neutral-text">;</span>
-                    <span className="ml-2 text-neutral-accent">// Your journey begins here!</span>
+                    <span className="text-ai-blue-400">project</span>.<span className="text-green-400">buildSolution</span>()<span className="text-neutral-text">;</span>
+                    <span className="ml-2 text-neutral-accent">// Your success starts here</span>
                   </motion.span>
                 </code>
               </pre>
@@ -157,20 +156,41 @@ const HeroSection = () => {
           >
             <Link href="/Login">
               <button className="relative group ai-button px-8 py-3 rounded-md text-lg font-medium overflow-hidden">
-                <span className="relative z-10">Get Your Website Today </span>
+                <span className="relative z-10">Start Your Project</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-ai-blue-500 to-ai-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </button>
             </Link>
             <Link href="/Login">
               <button className="px-8 py-3 bg-transparent border border-glass-border hover:border-ai-blue-500/50 rounded-md text-lg font-medium text-neutral-text transition-all hover:bg-glass-hover group">
-                <span>View Packages !!</span>
+                <span>View Our Work</span>
                 <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
               </button>
             </Link>
           </motion.div>
         </motion.div>
 
+        {/* Enhanced scroll indicator with seamless blend */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="absolute bottom-0 left-0 right-0 w-full"
+        >
+          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 z-20">
+
+            <div className="w-6 h-10 border-2 border-ai-blue-500/30 rounded-full flex justify-center">
+              <motion.div
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-2 h-2 bg-ai-blue-500 rounded-full mt-1"
+              />
+            </div>
+          </div>
+        </motion.div>
       </div>
+
+      {/* Full-width gradient overlay for seamless transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
     </div>
   );
 };
@@ -214,10 +234,9 @@ const FeaturesSection = () => {
   });
 
   return (
-    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/80 via-black to-black/90">
+    <div className="py-12 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-dot-white/[0.2] -z-10" />
-      <div className="absolute top-0 left-0 right-0 h-[200px] bg-gradient-to-b from-ai-blue-900/20 to-transparent -z-10" />
+      <div className="absolute top-0 left-0 w-full h-full bg-dot-white/[0.2] -z-10" />
 
       {/* Floating decorative elements */}
       <div className="absolute top-20 right-20 w-64 h-64 bg-ai-teal-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
@@ -341,9 +360,6 @@ const FeaturesSection = () => {
           </Link>
         </motion.div>
       </div>
-
-      {/* Smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -409,9 +425,14 @@ const LearningPathSection = () => {
   });
 
   return (
-    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/90 via-black/95 to-black">
-      {/* Connect with previous section */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none" />
+    <div className="py-12 relative overflow-hidden bg-black">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ai-purple-900/10 to-transparent z-0" />
+      <div className="absolute inset-0 bg-grid-small-white/[0.05] z-0" />
+
+      {/* Floating decorative elements */}
+      <div className="absolute top-20 right-20 w-64 h-64 bg-ai-teal-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
+      <div className="absolute bottom-20 left-20 w-64 h-64 bg-ai-purple-500/10 rounded-full blur-[80px] animate-pulse-subtle" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
@@ -561,9 +582,6 @@ const LearningPathSection = () => {
           </Link>
         </motion.div>
       </div>
-
-      {/* Smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -672,15 +690,11 @@ const TestimonialsSection = () => {
   }, [currentIndex, testimonials, isMobile]);
 
   return (
-    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black via-black to-black/95">
+    <div className="py-12 relative overflow-hidden">
       <Navbar />
-
-      {/* Connect with previous section */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none" />
-
-      <div className="absolute inset-0 bg-gradient-to-b from-ai-purple-900/10 via-ai-purple-900/5 to-transparent z-0" />
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-ai-purple-900/10 to-black z-0" />
       <div className="absolute inset-0 bg-dot-white/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] z-0" />
-
 
       {/* Animated light beams */}
       <div className="absolute inset-0 z-0">
@@ -949,9 +963,6 @@ const TestimonialsSection = () => {
           </Link>
         </motion.div>
       </div>
-
-      {/* Smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -1058,7 +1069,7 @@ const StatsSection = () => {
   };
 
   return (
-    <div className="py-20 bg-black relative overflow-hidden">
+    <div className="py-12 bg-black relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-r from-ai-blue-900/20 via-transparent to-ai-purple-900/20 z-0" />
 
@@ -1078,7 +1089,7 @@ const StatsSection = () => {
         />
       </div>
 
-      {/* <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1093,7 +1104,7 @@ const StatsSection = () => {
             Join our growing community of AI enthusiasts and professionals building the future.
           </p>
         </motion.div>
-        
+
         <motion.div
           ref={ref}
           className="grid grid-cols-2 md:grid-cols-4 gap-8"
@@ -1108,12 +1119,12 @@ const StatsSection = () => {
             >
               <div className="text-center p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300 group-hover:transform group-hover:-translate-y-2">
                 <div className="mb-2 relative">
-                  <Counter 
-                    startValue={stat.startValue} 
-                    endValue={stat.endValue} 
-                    suffix={stat.suffix} 
-                    precision={stat.precision} 
-                    color={stat.color} 
+                  <Counter
+                    startValue={stat.startValue}
+                    endValue={stat.endValue}
+                    suffix={stat.suffix}
+                    precision={stat.precision}
+                    color={stat.color}
                   />
                   <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-white/5 to-transparent rounded-full opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-300" />
                 </div>
@@ -1121,15 +1132,15 @@ const StatsSection = () => {
                   {stat.label}
                 </div>
               </div>
-              
-          
+
+              {/* Connector lines */}
               {index < stats.length - 1 && (
                 <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-[1px] bg-white/10" />
               )}
             </motion.div>
           ))}
         </motion.div>
-      </div> */}
+      </div>
     </div>
   );
 };
@@ -1142,10 +1153,12 @@ const CTASection = () => {
   });
 
   return (
-    <div className="py-16 relative overflow-hidden">
-      {/* Connect with previous section */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none" />
+    <div className="py-12 relative overflow-hidden">
+      {/* Enhanced background with animated gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-ai-blue-900/20 via-ai-purple-900/20 to-ai-teal-900/20 opacity-30 animate-gradient-shift" />
+      <div className="absolute inset-0 bg-dot-white/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]" />
 
+      {/* Animated blurred shapes */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{
@@ -1305,9 +1318,6 @@ const CTASection = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -1333,16 +1343,88 @@ const TechStackSection = () => {
     { name: "DALL-E", icon: "🎨" },
     { name: "Stable Diffusion", icon: "✨" },
     { name: "LangChain", icon: "⛓️" },
+    { name: "Excel", icon: "📊" },
+    { name: "Cooking", icon: "👨‍🍳" },
+    { name: "Swimming", icon: "🏊‍♂️" },
+    { name: "Photography", icon: "📷" },
+    { name: "Public Speaking", icon: "🎤" },
+    { name: "Yoga", icon: "🧘" },
+    { name: "Dancing", icon: "💃" },
+    { name: "Chess", icon: "♟️" },
+    { name: "Video Editing", icon: "🎬" },
+    { name: "Guitar", icon: "🎸" },
+    { name: "Piano", icon: "🎹" },
+    { name: "Meditation", icon: "🕉️" },
+    { name: "Digital Marketing", icon: "📢" },
+    { name: "Stock Market", icon: "📈" },
+    { name: "Car Repair", icon: "🔧" },
+    { name: "Gardening", icon: "🌱" },
+    { name: "Calligraphy", icon: "✒️" },
+    { name: "Origami", icon: "📄" },
+    { name: "Astronomy", icon: "🔭" },
+    { name: "Magic Tricks", icon: "🎩" },
+    { name: "Self-Defense", icon: "🥋" },
+    { name: "Baking", icon: "🍞" },
+    { name: "Wine Tasting", icon: "🍷" },
+    { name: "Fashion Design", icon: "👗" },
+    { name: "Woodworking", icon: "🪵" },
+    { name: "Fishing", icon: "🎣" },
+    { name: "Podcasting", icon: "🎙️" },
+    { name: "First Aid", icon: "🚑" },
+    { name: "Sign Language", icon: "🤟" },
+    { name: "Time Management", icon: "⏳" },
+    { name: "Psychology", icon: "🧠" },
+    { name: "AI Ethics", icon: "⚖️" }
   ];
 
   // Duplicate techs for seamless infinite scroll
   const duplicatedTechs = [...techs, ...techs];
 
-  return (
-    <div className="py-16 relative overflow-hidden bg-gradient-to-b from-black/90 to-black border-t border-glass-border">
-      {/* Connect with previous section */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none" />
+  // Animation settings - optimized for smoother performance
+  const scrollLeftAnimation = {
+    x: [0, -1920],
+    transition: {
+      x: {
+        repeat: Infinity,
+        repeatType: "loop",
+        duration: 20, // Faster animation
+        ease: "linear"
+      }
+    }
+  };
 
+  const scrollRightAnimation = {
+    x: [-1920, 0],
+    transition: {
+      x: {
+        repeat: Infinity,
+        repeatType: "loop",
+        duration: 20, // Faster animation
+        ease: "linear"
+      }
+    }
+  };
+
+  // Calculate ideal card width based on screen size
+  const getResponsiveCardWidth = () => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 640) return 110; // Small mobile
+      if (window.innerWidth < 768) return 130; // Mobile
+      if (window.innerWidth < 1024) return 160; // Tablet
+      return 180; // Desktop
+    }
+    return 180; // Default (SSR)
+  };
+
+  // Generate CSS with will-change for better performance
+  const optimizedScrollStyle = {
+    willChange: 'transform',
+    backfaceVisibility: 'hidden' as 'hidden',
+    WebkitFontSmoothing: 'subpixel-antialiased'
+  };
+
+  return (
+    <div className="py-8 relative overflow-hidden border-t border-glass-border">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ai-blue-900/5 to-transparent" />
 
@@ -1353,13 +1435,13 @@ const TechStackSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-10 lg:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-heading text-3xl md:text-5xl font-bold mb-6 font-heading"
+            className="text-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 font-heading"
           >
             Master Today's <span className="ai-gradient-text">Leading AI Technologies</span>
           </motion.h2>
@@ -1368,71 +1450,171 @@ const TechStackSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-body text-lg text-neutral-accent max-w-2xl mx-auto font-sans"
+            className="text-body text-sm sm:text-base md:text-lg text-neutral-accent max-w-2xl mx-auto font-sans"
           >
             Stay ahead of the curve with our comprehensive curriculum covering the latest AI tools and frameworks.
           </motion.p>
         </div>
 
-        {/* Infinite scroll container */}
-        <div className="relative w-full overflow-hidden">
-          <div className="flex animate-scroll">
+        {/* Infinite scroll container - First row - with performance optimizations */}
+        <div className="relative w-full overflow-hidden mb-4 md:mb-6">
+          <motion.div
+            className="flex"
+            animate={scrollLeftAnimation}
+            style={{
+              width: "max-content",
+              ...optimizedScrollStyle
+            }}
+          >
             {duplicatedTechs.map((tech, index) => (
               <motion.div
-                key={index}
+                key={`row1-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{
+                  duration: 0.4,
+                  delay: Math.min(index * 0.03, 0.9) // Cap the delay for better performance
+                }}
                 viewport={{ once: true }}
-                className="flex-shrink-0 mx-4"
+                className="flex-shrink-0 mx-1.5 sm:mx-2 md:mx-3"
               >
-                <div className="glass p-6 rounded-xl w-[200px] text-center group hover:border-ai-teal-500/30 transition-all duration-300 font-sans">
-                  <div className="text-4xl mb-3 transform group-hover:scale-110 transition-transform duration-300">
+                <div className="glass p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl w-[110px] sm:w-[130px] md:w-[160px] lg:w-[180px] text-center group hover:border-ai-teal-500/30 transition-all duration-300 font-sans transform hover:translate-y-[-2px]">
+                  <div className="text-2xl sm:text-3xl md:text-4xl mb-1.5 sm:mb-2 md:mb-3 transform group-hover:scale-110 transition-transform duration-300">
                     {tech.icon}
                   </div>
-                  <h3 className="text-heading font-semibold text-neutral-text group-hover:text-ai-teal-400 transition-colors font-heading">
+                  <h3 className="text-heading text-xs sm:text-sm md:text-base font-semibold text-neutral-text group-hover:text-ai-teal-400 transition-colors font-heading truncate">
                     {tech.name}
                   </h3>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
+
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 md:w-24 lg:w-32 bg-gradient-to-r from-black to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 md:w-24 lg:w-32 bg-gradient-to-l from-black to-transparent z-10" />
         </div>
 
-        {/* Gradient overlays for fade effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
+        {/* Second row - moving in opposite direction - with performance optimizations */}
+        <div className="relative w-full overflow-hidden">
+          <motion.div
+            className="flex"
+            animate={scrollRightAnimation}
+            style={{
+              width: "max-content",
+              ...optimizedScrollStyle
+            }}
+          >
+            {duplicatedTechs.slice().reverse().map((tech, index) => (
+              <motion.div
+                key={`row2-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: Math.min(index * 0.03, 0.9) // Cap the delay for better performance
+                }}
+                viewport={{ once: true }}
+                className="flex-shrink-0 mx-1.5 sm:mx-2 md:mx-3"
+              >
+                <div className="glass p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl w-[110px] sm:w-[130px] md:w-[160px] lg:w-[180px] text-center group hover:border-ai-blue-500/30 transition-all duration-300 font-sans transform hover:translate-y-[-2px]">
+                  <div className="text-2xl sm:text-3xl md:text-4xl mb-1.5 sm:mb-2 md:mb-3 transform group-hover:scale-110 transition-transform duration-300">
+                    {tech.icon}
+                  </div>
+                  <h3 className="text-heading text-xs sm:text-sm md:text-base font-semibold text-neutral-text group-hover:text-ai-blue-400 transition-colors font-heading truncate">
+                    {tech.name}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 md:w-24 lg:w-32 bg-gradient-to-r from-black to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 md:w-24 lg:w-32 bg-gradient-to-l from-black to-transparent z-10" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Landing page skeleton component
+const LandingPageSkeleton = () => {
+  return (
+    <div className="min-h-screen overflow-hidden bg-black">
+      {/* Background skeleton */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-ai-blue-900/30 z-0" />
+      <div className="absolute inset-0 bg-grid-small-white/[0.2] z-0" />
+
+      {/* Navbar skeleton */}
+      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b border-neutral-800/50 bg-black/60">
+        <div className="container mx-auto py-4 px-4">
+          <div className="flex items-center justify-between">
+            <div className="h-8 w-28 bg-neutral-800/70 rounded-lg animate-pulse"></div>
+            <div className="flex space-x-4">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className="h-8 w-16 bg-neutral-800/70 rounded-lg animate-pulse"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Hero skeleton */}
+      <div className="relative z-10 container mx-auto px-4 pt-32 pb-20 flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
+          {/* Badge skeleton */}
+          <div className="mb-8 w-64 h-10 bg-ai-blue-500/10 rounded-full animate-pulse"></div>
+
+          {/* Title skeleton */}
+          <div className="h-16 w-3/4 bg-neutral-800/70 rounded-lg mb-4 animate-pulse"></div>
+          <div className="h-16 w-2/3 bg-neutral-800/70 rounded-lg mb-8 animate-pulse"></div>
+
+          {/* Subtitle skeleton */}
+          <div className="h-6 w-1/2 bg-neutral-800/50 rounded-lg mb-4 animate-pulse"></div>
+          <div className="h-6 w-2/5 bg-neutral-800/50 rounded-lg mb-8 animate-pulse"></div>
+
+          {/* Code block skeleton */}
+          <div className="max-w-lg w-full mb-10 overflow-hidden bg-neutral-900/50 rounded-lg">
+            <div className="h-40 w-full p-4 animate-pulse">
+              <div className="flex items-center gap-1 mb-6">
+                <div className="w-3 h-3 rounded-full bg-red-500/70"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
+              </div>
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className={`h-4 bg-neutral-800/70 rounded mb-3 w-${Math.floor(Math.random() * 3) + 7}/12`}></div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA buttons skeleton */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-10">
+            <div className="h-12 w-40 bg-gradient-to-r from-ai-blue-500/30 to-ai-teal-500/30 rounded-md animate-pulse"></div>
+            <div className="h-12 w-40 bg-neutral-800/30 border border-glass-border rounded-md animate-pulse"></div>
+          </div>
+
+          {/* Users count skeleton */}
+          <div className="flex items-center bg-white/5 px-4 py-2 rounded-full w-56 h-12 animate-pulse"></div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default function LandingPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  return (
-    <>
-      <Head>
-        <title>Home | Crodlin Technology</title>
-        <meta name="description" content="Crodlin Technology - Your gateway to mastering AI and technology." />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
-      <div className="bg-black text-white overflow-hidden">
-        <HeroSection />
-        <div className="space-y-0"> {/* Remove default spacing between sections */}
-          <FeaturesSection />
-          <StatsSection />
-          <LearningPathSection />
-          <TestimonialsSection />
-          <CTASection />
-          <TechStackSection />
-        </div>
-        <section id="ContactSection">
-          <ContactSection />
-        </section>
-        <Footer />
-      </div>
-    </>
+  return (
+    <div className="bg-black text-white overflow-hidden">
+      <HeroSection />
+      <FeaturesSection />
+      <LearningPathSection />
+      <TestimonialsSection />
+      <CTASection />
+      {/* <TechStackSection /> */}
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
+import Footer from "./components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -51,12 +52,13 @@ export default function RootLayout({
               Crodlin Tech
             </h1>
             <p className="mt-2 text-sm text-gray-400">
-               Precision in every pixel
+              Precision in every pixel
             </p>
           </div>
         ) : (
           <>
             {children}
+            {/* <Footer /> */}
           </>
         )}
 
